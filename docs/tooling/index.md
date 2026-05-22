@@ -13,6 +13,7 @@ Tools you'll use to build, deploy, tune, and debug robot code.
 | **Gradle** | Build system | [Gradle Commands](gradle-commands) |
 | **AdvantageScope** | Data visualization | [AdvantageScope](advantagescope) |
 | **QDriverStation** | Driver station (Mac/Linux) | [QDriverStation](qdriverstation) |
+| **Elastic** | Competition dashboard | [Elastic](elastic) |
 
 ## Essential Setup Checklist
 

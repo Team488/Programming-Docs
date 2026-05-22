@@ -80,6 +80,7 @@ export default defineConfig({
             { text: 'Gradle Commands', link: '/tooling/gradle-commands' },
             { text: 'AdvantageScope', link: '/tooling/advantagescope' },
             { text: 'QDriverStation', link: '/tooling/qdriverstation' },
+            { text: 'Elastic', link: '/tooling/elastic' },
           ],
         },
       ],
