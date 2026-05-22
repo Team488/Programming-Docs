@@ -72,7 +72,7 @@ export default defineConfig({
       ],
     },
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/Team488' },
+      { icon: 'github', link: 'https://github.com/Team488/Programming-Docs' },
     ],
     search: {
       provider: 'local',
