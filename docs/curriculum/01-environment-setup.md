@@ -1,22 +1,76 @@
 # Environment Setup
 
-Get your computer ready for FRC programming.
+Get your computer ready for FRC programming. No experience needed.
 
-## Requirements
+## What You Will Install
 
-- **Java 17** (required by WPILib)
-- **VSCode** with WPILib extension
-- **Git**
+| Software | What It Does |
+|----------|-------------|
+| **Java 17** | The language your robot code is written in |
+| **VSCode + WPILib** | The editor where you write code |
+| **Git & GitHub Desktop** | Tracks changes to your code and shares it with the team |
+
+## Install Java 17
+
+Java is the programming language you will use to control the robot. Think of it like a translator between your brain and the robot -- you write instructions in Java, and the computer turns them into commands the robot understands.
+
+### Windows / macOS
+1. Go to [Adoptium](https://adoptium.net/)
+2. Download **Java 17 (LTS)** for your operating system
+3. Run the installer and follow the prompts
+
+### Linux
+```bash
+# Ubuntu/Debian
+sudo apt install openjdk-17-jdk
+
+# Verify it worked
+java -version
+# Should show: openjdk version "17.x.x"
+```
+
+<details>
+<summary><strong>What is Java and why Java 17 specifically?</strong></summary>
+
+Java is one of the most popular programming languages in the world. It is used for everything from Android apps to bank systems to robot code. FRC uses Java because it runs on the roboRIO (the robot's computer) and WPILib (the FRC library) is written for it.
+
+**Why version 17?** WPILib is built specifically for Java 17, which is a Long Term Support (LTS) release. This means it will receive updates for many years. Newer versions of Java exist, but WPILib has not been updated to use them yet. Older versions are missing features WPILib needs.
+
+**If you already have a different Java version:** You can install Java 17 alongside it. Your robot project will use Java 17 even if your computer has other versions installed.
+
+</details>
+
+## Install VSCode + WPILib
+
+VSCode is the editor where you will write all your robot code. WPILib is the FRC toolkit that adds all the robot-specific features to VSCode.
+
+### Download WPILib
+1. Go to [WPILib GitHub Releases](https://github.com/wpilibsuite/allwpilib/releases)
+2. Download the installer for your OS
+
+### Windows
+1. Run the `.exe` installer
+2. Select **"Install VSCode + WPILib"**
+3. Follow the prompts
+
+### macOS
+1. Open the `.dmg` file
+2. Drag VSCode to Applications
+3. If blocked: go to **System Settings > Privacy & Security** and click **"Open Anyway"**
+
+### Linux
+1. Extract the `.zip` installer
+2. Run: `sudo ./Install-WPILib.sh`
 
 <details>
 <summary><strong>What is WPILib?</strong></summary>
 
-**WPILib** (WPI Library) is the official software library for FRC robots. It is maintained by Worcester Polytechnic Institute and provides all the building blocks you need to control a robot: motor control, sensors, communication, and the command-based framework.
+WPILib (WPI Library) is the official FRC software library made by Worcester Polytechnic Institute. It provides all the building blocks for robot control: motor control, sensors, communication, and the command-based framework.
 
-**Analogy:** If building a robot were like building a house, WPILib would be the pre-made doors, windows, and plumbing. You could make everything from scratch, but why would you when the basics are already provided?
+**Analogy:** If building a robot program were building a house, WPILib would be the pre-made doors, windows, and plumbing. You could make everything from scratch, but the basics are already provided.
 
 **What WPILib gives you:**
-- Motor controller libraries (SparkMax, TalonFX, etc.)
+- Motor controller libraries (SparkMax, TalonFX)
 - Sensor libraries (gyros, encoders, cameras)
 - Command-based programming framework
 - Robot simulation (test without a real robot)
@@ -25,242 +79,181 @@ Get your computer ready for FRC programming.
 </details>
 
 <details>
-<summary><strong>What is VSCode and why do we use it?</strong></summary>
+<summary><strong>Why VSCode and not another editor?</strong></summary>
 
-**VSCode** (Visual Studio Code) is a free code editor made by Microsoft. It is the official editor for FRC because WPILib provides a VSCode extension that integrates everything you need.
+WPILib only works with VSCode because the WPILib extension integrates deeply with it. You cannot use IntelliJ, Eclipse, or any other editor for FRC development.
 
-**Why VSCode over other editors:**
-- Free and works on Windows, macOS, and Linux
+**Why VSCode is good:**
+- Free on all operating systems
 - WPILib extension provides one-click build, deploy, and test
-- Built-in terminal for running commands
-- Git integration for version control
-- IntelliSense (autocomplete) for Java code
-
-**Do not use:** IntelliJ, Eclipse, or Notepad for FRC. The WPILib extension only works with VSCode.
+- IntelliSense (autocomplete) for Java
+- Built-in terminal and Git support
+- Huge library of extensions
 
 </details>
 
-## Install WPILib
+## Install Git & GitHub Desktop
 
-Download the installer from [GitHub Releases](https://github.com/wpilibsuite/allwpilib/releases).
+Git tracks changes to your code (like a save button that remembers every version). GitHub Desktop gives you a visual way to use Git without typing commands.
 
-### Windows
+### Install Git
+- **Windows:** Download from [git-scm.com](https://git-scm.com/) and run the installer
+- **macOS:** Run `git --version` in Terminal (it will prompt you to install if needed)
+- **Linux:** `sudo apt install git`
 
-1. Run the `.exe` installer
-2. Select **"Install VSCode + WPILib"**
-3. Follow the prompts
-
-### macOS
-
-1. Run the `.dmg` file
-2. Drag VSCode to Applications
-3. If blocked, go to **System Settings > Privacy & Security** and click **"Open Anyway"**
-
-### Linux
-
-1. Extract the `.zip` installer
-2. Run the install script:
-   ```bash
-   sudo ./Install-WPILib.sh
-   ```
+### Install GitHub Desktop
+1. Go to [desktop.github.com](https://desktop.github.com/)
+2. Download and install for your OS
+3. Sign in with your GitHub account (create one at github.com if you do not have one)
 
 <details>
-<summary><strong>Why does macOS block the installer?</strong></summary>
+<summary><strong>What is the difference between Git and GitHub Desktop?</strong></summary>
 
-macOS has a security feature called **Gatekeeper** that blocks apps not downloaded from the App Store or identified developers. WPILib is safe, but Apple does not know that.
+**Git** is the engine that tracks changes. It runs in the background on your computer.
 
-**What to do:**
-1. Try to open the app normally (it will be blocked)
-2. Go to **System Settings > Privacy & Security**
-3. Scroll down and click **"Open Anyway"**
-4. Confirm you want to open it
+**GitHub Desktop** is a visual app that lets you use Git by clicking buttons instead of typing commands.
 
-This is normal for many developer tools on macOS.
+**Think of it like driving a car:**
+- Git = the engine and transmission (does the actual work)
+- GitHub Desktop = the steering wheel and pedals (lets you control it easily)
+
+Both control the same thing -- GitHub Desktop just gives you buttons and menus instead of commands you have to memorize.
 
 </details>
 
-## Verify Installation
+## Verify Everything Works
 
 1. Open VSCode
-2. Press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (Mac)
-3. Type **"WPILib"** - you should see WPILib commands appear
+2. Press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (Mac) to open the Command Palette
+3. Type **"WPILib"** -- you should see WPILib commands appear
 
-<details>
-<summary><strong>What is the Command Palette?</strong></summary>
+## Clone XbotEdu (Your Practice Project)
 
-The **Command Palette** (opened with `Ctrl+Shift+P` or `Cmd+Shift+P`) is VSCode's universal search bar for commands. Instead of clicking through menus, you type what you want to do.
+XbotEdu is a practice robot project with built-in tests. You can write and test robot code without owning a physical robot.
 
-**Analogy:** Think of it like Siri or Google Assistant for VSCode. Instead of navigating through settings, you just tell it what you want.
+### Using GitHub Desktop (recommended for beginners)
+1. Open GitHub Desktop
+2. Click **File > Clone Repository**
+3. Go to the **URL** tab
+4. Enter: `https://github.com/Team488/XbotEdu.git`
+5. Choose where to save it on your computer
+6. Click **Clone**
 
-**Useful commands you will use:**
-- `WPILib: Build Robot Code` - compiles your code
-- `WPILib: Deploy Robot Code` - sends code to the robot
-- `WPILib: Start Tool` - opens Shuffleboard, SmartDashboard, etc.
-- `WPILib: Create a new project` - starts a new robot project
-
-</details>
-
-## Clone XbotEdu
-
-XbotEdu is the practice repo with unit tests. You can code without a physical robot.
-
+### Using the command line (alternative)
 ```bash
 git clone https://github.com/Team488/XbotEdu.git
 cd XbotEdu
 ```
 
-<details>
-<summary><strong>What does "clone" mean?</strong></summary>
+## Build and Test
 
-**Cloning** downloads a complete copy of a GitHub repository to your computer, including all files and the entire history of changes.
+Once you have the project open in VSCode:
 
-**Analogy:** Think of cloning like making a photocopy of a shared notebook. You get your own copy to write in, and the original on GitHub stays unchanged. When you are done, you can send your changes back to the original (that is called a Pull Request).
+1. Open the terminal in VSCode: **Terminal > New Terminal**
+2. Build the project:
+   ```bash
+   # Windows
+   gradlew.bat build
+   
+   # macOS / Linux
+   ./gradlew build
+   ```
+3. Run the tests:
+   ```bash
+   # Windows
+   gradlew.bat test
+   
+   # macOS / Linux
+   ./gradlew test
+   ```
 
-```
-GitHub (original)  ----clone---->  Your computer (copy)
-```
-
-After cloning, you will have a folder on your computer with all the project files.
-
-</details>
-
-## Build the Project
-
-```bash
-# Windows
-gradlew.bat build
-
-# macOS / Linux
-./gradlew build
-```
-
-<details>
-<summary><strong>What is Gradle and what does "build" do?</strong></summary>
-
-**Gradle** is a build tool that takes your Java source code and turns it into a program the roboRIO can run.
-
-**What happens when you run `build`:**
-1. Gradle downloads all dependencies (libraries your code uses)
-2. Compiles your `.java` files into `.class` files (bytecode)
-3. Runs any tests
-4. Packages everything into a deployable format
-
-**Analogy:** Think of Gradle like a chef following a recipe. Your Java code is the recipe ingredients, and Gradle follows the instructions (`build.gradle`) to cook everything together into a finished dish.
-
-**First build takes longer** because Gradle needs to download all the dependencies. Subsequent builds are faster.
-
-</details>
-
-## Run Tests
-
-```bash
-# Windows
-gradlew.bat test
-
-# macOS / Linux
-./gradlew test
-```
-
-You should see test results in the terminal. If all tests pass, you are ready.
+You should see **BUILD SUCCESSFUL** in the output.
 
 <details>
-<summary><strong>What are unit tests and why do we need them?</strong></summary>
+<summary><strong>What does "build" actually do?</strong></summary>
 
-**Unit tests** are small programs that test individual pieces of your code to make sure they work correctly.
+Building is the process of turning your Java code into something the robot can run. When you run `./gradlew build`, this happens:
 
-**Analogy:** Before a chef serves a dish, they taste it to make sure it is right. Unit tests are like tasting each ingredient separately before combining them.
+1. **Download dependencies** -- Gradle downloads all the libraries your code needs
+2. **Compile** -- Your `.java` files are turned into `.class` files (bytecode)
+3. **Test** -- Any unit tests are run to check for bugs
+4. **Package** -- Everything is bundled into a deployable format
 
-**Why XbotEdu uses tests:**
-- You do not need a physical robot to practice
-- Tests catch bugs before you deploy to the real robot
-- They show you what the correct behavior should be
-- Mentors can review your work automatically
-
-**Example:**
-```java
-// This test checks that add() returns the correct result
-@Test
-public void testAddition() {
-    assertEquals(5, calculator.add(2, 3));  // Should pass
-    assertEquals(0, calculator.add(1, 1));  // Should FAIL - catches a bug!
-}
-```
+**The first build is slowest** because it downloads dependencies. Subsequent builds are much faster.
 
 </details>
 
 ## Troubleshooting
 
-| Problem | Fix |
-|---------|-----|
-| `./gradlew: Permission denied` | Run `chmod +x gradlew` |
-| Java version error | Install Java 17 from [Adoptium](https://adoptium.net/) |
+| Problem | Solution |
+|---------|----------|
+| `./gradlew: Permission denied` | Run `chmod +x gradlew` (macOS/Linux) |
+| `Java version error` | Install Java 17 from [Adoptium](https://adoptium.net/) |
 | VSCode does not show WPILib | Reinstall the WPILib extension from the marketplace |
 | Build fails on first run | Wait for dependencies to download, then try again |
+| GitHub Desktop cannot find repo | Make sure you typed the URL exactly right |
+| "command not found" for git | Restart your terminal after installing Git |
 
-<details>
-<summary><strong>What does `chmod +x` do?</strong></summary>
+## Learning Java Resources
 
-`chmod +x` makes a file **executable** on macOS and Linux. Windows does not need this.
+You will learn Java in the next module, but here are excellent free resources to bookmark:
 
-**Why it is needed:** The `gradlew` script is a program that runs Gradle. By default, downloaded files are not allowed to run as programs for security reasons. `chmod +x` tells the system "this file is safe to run as a program."
-
-```bash
-chmod +x gradlew    # Make gradlew executable
-./gradlew build     # Now it will work
-```
-
-The `+x` means "add execute permission."
-
-</details>
+| Resource | What It Teaches | Best For |
+|----------|----------------|----------|
+| [Codecademy Learn Java](https://www.codecademy.com/learn/learn-java) | Interactive coding exercises | Complete beginners |
+| [W3Schools Java Tutorial](https://www.w3schools.com/java/) | Quick reference with examples | Looking things up |
+| [freeCodeCamp Java Course](https://www.youtube.com/watch?v=A74TOX803D0) | 4-hour video course | Visual learners |
+| [Java for Complete Beginners](https://www.udemy.com/course/java-tutorial/) | Free Udemy course | Step-by-step learners |
+| [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/) | Official Java documentation | Reference when you get stuck |
 
 ---
 
 ## Quiz
 
-**Q1:** Which Java version does WPILib require?
+**Q1:** Why does FRC use Java 17 specifically?
 
-- [ ] A) Java 11
-- [ ] B) Java 17
-- [ ] C) Java 21
-- [ ] D) Java 8
+- [ ] A) It is the newest Java version
+- [ ] B) WPILib is built for Java 17
+- [ ] C) Java 17 is the only free version
+- [ ] D) FRC does not use Java at all
 
 <details>
 <summary>Answer</summary>
 
-**B) Java 17**
+**B) WPILib is built for Java 17**
 
-**Why:** WPILib is built against Java 17, which is a Long Term Support (LTS) release. This means it receives security updates for several years. Java 11 is too old and lacks features WPILib uses. Java 21 is newer but WPILib has not been updated to support it yet. Java 8 is very outdated and missing many modern Java features.
+WPILib targets Java 17 because it is a Long Term Support (LTS) release. Newer versions exist but WPILib has not been updated to use them yet.
 
 </details>
 
-**Q2:** What command builds the project on macOS/Linux?
+**Q2:** What is the difference between Git and GitHub Desktop?
 
-- [ ] A) `gradle build`
-- [ ] B) `./gradlew build`
-- [ ] C) `make build`
-- [ ] D) `npm build`
+- [ ] A) They are the same thing
+- [ ] B) Git is the engine, GitHub Desktop is a visual app to control it
+- [ ] C) GitHub Desktop is only for Windows
+- [ ] D) Git only works with GitHub Desktop
 
 <details>
 <summary>Answer</summary>
 
-**B) `./gradlew build`**
+**B) Git is the engine, GitHub Desktop is a visual app to control it**
 
-**Why:** `gradlew` (Gradle Wrapper) is a script included in the project that downloads and runs the correct version of Gradle. The `./` prefix means "run the file in the current directory." Option A (`gradle build`) would use a globally installed Gradle which might be the wrong version. Option C (`make`) is a different build system used for C/C++ projects. Option D (`npm`) is for JavaScript/Node.js projects, not Java.
+Git runs in the background and handles version control. GitHub Desktop gives you a visual interface with buttons and menus so you do not need to memorize commands.
 
 </details>
 
-**Q3:** Why does XbotEdu use unit tests?
+**Q3:** What command runs the tests in XbotEdu?
 
-- [ ] A) To slow down development
-- [ ] B) So you can practice without a physical robot
-- [ ] C) To replace the driver station
-- [ ] D) To generate robot logs
+- [ ] A) `./gradlew build`
+- [ ] B) `./gradlew test`
+- [ ] C) `./gradlew run`
+- [ ] D) `./gradlew compile`
 
 <details>
 <summary>Answer</summary>
 
-**B) So you can practice without a physical robot**
+**B) `./gradlew test`**
 
-**Why:** Unit tests simulate robot behavior on your computer, so you can write and test code even when you do not have access to the physical robot. This is especially useful during off-season or when working from home. Option A is the opposite of the truth -- tests actually speed up development by catching bugs early. Options C and D are unrelated to what unit tests do.
+The `test` command runs all unit tests in the project. `build` compiles everything (and also runs tests), but `test` specifically focuses on running the tests.
 
 </details>

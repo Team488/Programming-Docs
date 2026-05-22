@@ -1,407 +1,433 @@
 # Java Basics
 
-A quick crash course in Java. You only need to know enough to write robot code.
+Learn enough Java to write robot code. If you have never programmed before, start here.
 
-<details>
-<summary><strong>Do I need to learn all of Java?</strong></summary>
+**New to programming?** You do not need any experience. This module starts from zero and teaches you exactly what you need for FRC.
 
-**No!** You only need a subset of Java to write robot code. This module covers exactly what you will use. Think of it like learning to drive -- you do not need to know how the engine works, just how to steer, brake, and accelerate.
+## What is Programming?
 
-**What you WILL use:** variables, methods, classes, inheritance, interfaces
-**What you will NOT need (for now):** generics, streams, reflection, multithreading
+Programming is giving instructions to a computer. You write steps in a language the computer can understand (Java), and it follows those steps exactly.
 
-Focus on understanding the concepts here. You will learn more as you go.
+**Analogy:** Think of programming like writing a recipe. You list ingredients (variables) and steps (methods). The computer is the chef that follows your recipe perfectly every time.
 
-</details>
+## Learning Resources
 
-## Variables
+Everyone learns differently. Use these alongside this tutorial:
+
+| Resource | Style | Link |
+|----------|-------|------|
+| **Codecademy Learn Java** | Interactive -- type code in your browser | [codecademy.com/learn/learn-java](https://www.codecademy.com/learn/learn-java) |
+| **W3Schools Java** | Read and try examples | [w3schools.com/java](https://www.w3schools.com/java/) |
+| **freeCodeCamp Java Course** | 4-hour video walkthrough | [youtube.com/watch?v=A74TOX803D0](https://www.youtube.com/watch?v=A74TOX803D0) |
+| **Java for Complete Beginners** | Udemy free course | [udemy.com/course/java-tutorial](https://www.udemy.com/course/java-tutorial/) |
+| **Programiz Java** | Tutorials with visuals | [programiz.com/java-programming](https://www.programiz.com/java-programming) |
+
+**Tip:** If you get stuck on a concept, look it up on W3Schools or watch the freeCodeCamp video. Seeing the same idea explained differently helps it click.
+
+## Variables (Storing Information)
+
+Variables store data so you can use it later. Every variable has a **type** (what kind of data) and a **name** (how you refer to it).
 
 ```java
-int count = 5;              // Whole numbers (no decimals): 1, 42, -7
-double speed = 0.75;        // Decimal numbers: 3.14, -0.5, 100.0
-String name = "XBot";       // Text (must be in quotes): "Hello", "FrontLeft"
-boolean isEnabled = true;   // True or false only: true, false
+// Type  name   =  value;
+int    score  =  42;         // Whole numbers (no decimals)
+double speed  =  0.75;       // Decimal numbers
+String name   = "XBot";      // Text (must be in quotes)
+boolean on    = true;        // True or false
 ```
 
 <details>
-<summary><strong>Why are there different types of numbers?</strong></summary>
+<summary><strong>Why do I need to specify a type?</strong></summary>
 
-Java is a **strongly typed** language, meaning every variable must have a specific type. This prevents bugs.
+Java is a **strongly typed** language. This means every variable must have a specific type, and you cannot put the wrong kind of data in it. This prevents bugs.
 
-**Analogy:** Think of variable types like different containers:
+**Analogy:** Think of variable types like containers:
 - `int` = a box that only holds whole items (you cannot put half an apple in it)
-- `double` = a measuring cup that can hold any amount (1.5 cups, 0.75 cups)
-
-**When to use which:**
-- Use `int` for counting things: number of motors, CAN IDs, array indices
-- Use `double` for measurements: speed, voltage, PID values, distances
+- `double` = a measuring cup (holds any amount: 1.5, 0.75, etc.)
+- `String` = a label maker (holds text only)
+- `boolean` = a light switch (only on or off)
 
 ```java
-int motorPort = 5;          // Port numbers are always whole numbers
-double motorSpeed = 0.75;   // Speed can be any value between -1.0 and 1.0
+int x = 0.5;   // ERROR! Cannot put a decimal in an int
+double y = 5;  // OK! Java automatically converts 5 to 5.0
 ```
 
-**Common mistake:** `int speed = 0.75;` will not compile! You cannot put a decimal in an int.
+**In robot code:**
+- `int` for CAN IDs, port numbers, counting
+- `double` for motor speeds, PID values, distances
+- `String` for names, logging messages
+- `boolean` for "is the button pressed?", "is the motor running?"
 
 </details>
 
-## Methods
+### Naming Rules
 
 ```java
-// Returns a value - the caller gets the result back
-// "public" means any other class can call this method
-// "double" is the return type - this method gives back a decimal number
+int motorSpeed;    // camelCase -- start lowercase, capitalize each new word
+int MotorSpeed;    // Wrong convention (classes use this style, not variables)
+int 2ndMotor;      // ERROR! Cannot start with a number
+int motor-speed;   // ERROR! No hyphens allowed
+int motor speed;   // ERROR! No spaces allowed
+```
+
+**Always use descriptive names.** `speed` is better than `s`. `frontLeftMotorPower` is better than `flmp`.
+
+## Methods (Actions)
+
+A **method** is a named block of code that does something. Think of it like a command you create: "when I say `stopMotor()`, set the motor power to 0."
+
+```java
+// Returns a value -- gives a result back
 public double add(double a, double b) {
-    return a + b;  // "return" sends the result back to whoever called this
+    return a + b;  // "return" sends the result back to the caller
 }
 
-// Does something, returns nothing (void)
-// "void" means this method does not give anything back - it just does work
+// Returns nothing (void) -- just does the work
 public void stopMotor() {
-    motor.setPower(0);  // Sets motor power to 0 (stopped)
+    motor.setPower(0);
 }
 ```
 
 <details>
-<summary><strong>What is the difference between returning a value and void?</strong></summary>
+<summary><strong>Return vs Void -- what is the difference?</strong></summary>
 
-**Returning a value** is like asking someone a question -- you get an answer back.
-**Void** is like giving someone an order -- they just do it, no answer needed.
+When you ask someone a question, you expect an answer back. When you give someone an order, you just want them to do it.
 
 ```java
-// Returns a value - like asking "what is 2 + 3?"
-double result = add(2, 3);  // result is now 5.0
+// "Return" = asking a question
+double result = add(2, 3);  // Returns 5.0, stored in "result"
 
-// Void - like saying "stop the motor!"
-stopMotor();  // Just does it, nothing to receive
+// "Void" = giving an order
+stopMotor();  // Just does it, no result needed
 ```
 
-**How to tell:** Look at the method signature:
-- `public double add(...)` -- returns a `double`, you must use `return` inside
-- `public void stopMotor()` -- returns nothing (`void`), no `return` needed
+**How to tell the difference:**
+- `public double add(...)` -- the word `double` before the name means "this method returns a double"
+- `public void stopMotor()` -- the word `void` means "this method returns nothing"
+
+Whenever you see `return`, the method is sending a value back. Whenever you see `void`, there is no return value.
 
 </details>
+
+### Parameters (Inputs to Methods)
+
+Methods can take **parameters** -- information they need to do their job.
+
+```java
+public void setMotorSpeed(double speed) {
+    // "speed" is a parameter -- the caller decides what value to pass
+    System.out.println("Setting motor to " + speed);
+}
+
+// Calling the method:
+setMotorSpeed(0.5);   // Output: Setting motor to 0.5
+setMotorSpeed(-1.0);  // Output: Setting motor to -1.0
+```
+
+The parameter `speed` gets a different value each time you call the method. This is how you make reusable code -- one method works for any value.
 
 ## Classes & Objects
 
-A **class** is a blueprint. An **object** is a specific instance.
+A **class** is a blueprint. An **object** is an actual thing built from that blueprint.
 
 ```java
+// Class = the blueprint
 public class Motor {
-    private int port;  // "private" means only code inside this class can access this
+    // Fields: data this class stores
+    private int port;        // "private" means only code in this class can access it
+    private double power;    // Current power level
 
-    // Constructor - runs automatically when you create a new Motor
-    // The parameter (int port) is the information needed to create this Motor
+    // Constructor: runs when you create a new Motor (builds the object)
     public Motor(int port) {
-        this.port = port;  // "this.port" = this object's port, "port" = the parameter
+        this.port = port;     // "this.port" = the field, "port" = the parameter
+        this.power = 0;       // Start stopped
     }
 
-    // Method - something this Motor can do
+    // Method: something this Motor can do
     public void setPower(double power) {
-        // Send power to motor at this port
-        // In real code, this would communicate with the actual hardware
+        this.power = power;
     }
 }
 
-// Create an object (an actual Motor, not just the blueprint)
-// "new Motor(1)" calls the constructor with port = 1
-Motor leftMotor = new Motor(1);
-leftMotor.setPower(0.5);  // Set this specific motor to 50% power
+// Objects = actual motors built from the blueprint
+Motor leftMotor = new Motor(1);   // Creates a Motor on port 1
+Motor rightMotor = new Motor(2);  // Creates a Motor on port 2
+
+leftMotor.setPower(0.5);   // Only left motor moves
+rightMotor.setPower(-0.5); // Only right motor moves (reverse)
 ```
 
 <details>
-<summary><strong>Class vs Object -- what is the difference?</strong></summary>
+<summary><strong>The cookie cutter analogy for classes and objects</strong></summary>
 
-**Analogy:** A class is like a cookie cutter. An object is an actual cookie made from that cutter.
+A **class** is like a cookie cutter. It defines the shape but is not a cookie itself.
+An **object** is an actual cookie made from that cutter.
 
 ```
-Class (blueprint):     Motor                    -- Just the design
-Objects (instances):   leftMotor, rightMotor    -- Actual motors you use
+Class:  Motor (blueprint) -- just a design
+Object: leftMotor (port 1) -- an actual motor you can control
+Object: rightMotor (port 2) -- another motor, independent
 ```
 
-You can create many objects from one class:
-```java
-Motor leftMotor = new Motor(1);    // Motor on port 1
-Motor rightMotor = new Motor(2);   // Motor on port 2
-Motor armMotor = new Motor(3);     // Motor on port 3
+Each object is independent. Changing `leftMotor` does not affect `rightMotor`. This is important -- your robot might have 8 motors, each controlled by its own object, all created from the same class.
 
-// Each is independent - changing one does not affect the others
-leftMotor.setPower(0.5);    // Only left motor moves
-rightMotor.setPower(-0.5);  // Only right motor moves (reverse)
-```
-
-**In robot code:** You will have one class (like `ShooterSubsystem`) but might create multiple objects from it (left shooter, right shooter).
+**In robot code:** You will write one class (like `IntakeSubsystem`) and create one object from it. But the class is the design, the object is the actual thing running on the robot.
 
 </details>
 
-## Inheritance
+### The Constructor
 
-A child class **extends** a parent class and can override its methods.
+The **constructor** is a special method that runs when you create an object with `new`. It sets up the object's initial state.
 
 ```java
-// Parent class (also called "base class" or "superclass")
-// Defines behavior that all subsystems share
-public class Subsystem {
-    public void periodic() { }  // Empty by default - child classes can fill this in
+public class Motor {
+    private int port;
+
+    // Constructor: same name as the class, no return type
+    public Motor(int port) {
+        this.port = port;  // Save the port number
+    }
 }
 
-// Child class (also called "derived class")
-// "extends Subsystem" means DriveSubsystem IS A Subsystem with extra features
-public class DriveSubsystem extends Subsystem {
-    // @Override tells Java: "I am replacing the parent's version of this method"
-    @Override
+// When you call this:
+Motor m = new Motor(5);
+// Java does: 1. Creates a blank Motor object
+//            2. Calls the constructor with port=5
+//            3. Returns the finished object
+```
+
+If you do not write a constructor, Java provides an empty one. But you usually want one to set up your object properly.
+
+## Inheritance (Classes Can Extend Other Classes)
+
+**Inheritance** lets one class get all the features of another class, then add its own.
+
+```java
+// Parent class -- defines shared behavior
+public class BaseSubsystem {
     public void periodic() {
         // Called every robot loop (~20ms)
-        // This code runs 50 times per second while the robot is on
+        // Default: do nothing
+    }
+
+    public void log(String message) {
+        System.out.println(message);
+    }
+}
+
+// Child class -- gets everything from BaseSubsystem, adds its own
+// "extends" means DriveSubsystem IS A BaseSubsystem with extra features
+public class DriveSubsystem extends BaseSubsystem {
+    @Override  // Tells Java: "I am replacing the parent's periodic()"
+    public void periodic() {
+        // This runs instead of BaseSubsystem's periodic()
         // Update motor speeds, read sensors, etc.
     }
+
+    // New method only DriveSubsystem has
+    public void drive(double speed) {
+        // Drive logic here
+    }
 }
 ```
 
 <details>
-<summary><strong>Why use inheritance?</strong></summary>
+<summary><strong>Why use inheritance instead of copying code?</strong></summary>
 
-**Inheritance** lets you reuse code. Instead of writing the same code in every subsystem, you put common behavior in a parent class and only write the differences in child classes.
-
-**Analogy:** Think of a school uniform policy. The school (parent class) says "all students wear a uniform." Each student (child class) follows that rule but can personalize it (different shoes, accessories).
+Without inheritance, you would copy the same code into every class:
 
 ```java
-// Without inheritance (repeating code):
+// BAD: Copy-paste in every subsystem
 public class DriveSubsystem {
-    public void periodic() { /* update motors */ }
-    public void logData() { /* send to dashboard */ }
+    public void log(String msg) { System.out.println(msg); }
 }
+
 public class ShooterSubsystem {
-    public void periodic() { /* update shooter */ }
-    public void logData() { /* send to dashboard */ }  // Same code!
+    public void log(String msg) { System.out.println(msg); }  // SAME CODE
 }
 
-// With inheritance (no repetition):
-public class Subsystem {
-    public void periodic() { }       // Common behavior
-    public void logData() { }        // Common behavior
+// GOOD: Write once, inherit everywhere
+public class BaseSubsystem {
+    public void log(String msg) { System.out.println(msg); }
 }
-public class DriveSubsystem extends Subsystem {
-    @Override
-    public void periodic() { /* update motors */ }  // Only the difference
-}
-public class ShooterSubsystem extends Subsystem {
-    @Override
-    public void periodic() { /* update shooter */ }  // Only the difference
-}
+
+public class DriveSubsystem extends BaseSubsystem { }
+public class ShooterSubsystem extends BaseSubsystem { }
+// Both can call log() without writing it!
 ```
 
-**In XBot:** Most of your subsystems will extend `BaseSubsystem` which provides logging, periodic calls, and other common features.
+This is called **Don't Repeat Yourself (DRY)**. If you find yourself copying code, you should probably use inheritance or another pattern to share it.
 
 </details>
 
-## Interfaces
+## Interfaces (Contracts)
 
-An **interface** defines a contract. Any class that `implements` it must provide the methods.
+An **interface** is a list of requirements. Any class that `implements` the interface must provide all the methods listed.
 
 ```java
-// Interface: defines WHAT methods must exist, but not HOW they work
-// Think of this as a job description - it lists requirements but does not do the work
+// Interface: "Any electrical contract must have these methods"
 public interface ElectricalContract {
-    CANMotorControllerInfo getLeftMotor();   // Must provide this method
-    CANMotorControllerInfo getRightMotor();  // Must provide this method too
+    double getMotorSpeed();   // Must exist
+    int getMotorPort();       // Must exist
+    boolean isMotorReady();   // Must exist
 }
 
-// Concrete class: actually implements the interface
-// "implements ElectricalContract" promises to provide all methods the interface requires
+// Class that promises to fulfill the contract
 public class CompetitionContract implements ElectricalContract {
-    @Override  // We are providing the interface's required method
-    public CANMotorControllerInfo getLeftMotor() {
-        return new CANMotorControllerInfo("Left", CANBusId.RIO, 1);  // Port 1
+    @Override
+    public double getMotorSpeed() {
+        return 0.5;  // Competition robot's motor speed
     }
 
     @Override
-    public CANMotorControllerInfo getRightMotor() {
-        return new CANMotorControllerInfo("Right", CANBusId.RIO, 2);  // Port 2
+    public int getMotorPort() {
+        return 1;  // Competition robot's wiring
+    }
+
+    @Override
+    public boolean isMotorReady() {
+        return true;  // It is wired and ready
     }
 }
 ```
 
 <details>
-<summary><strong>Interface vs Class -- when to use which?</strong></summary>
+<summary><strong>Interface vs Class -- what is the difference?</strong></summary>
 
-**Interface** = a contract that says "any class implementing me must have these methods"
-**Class** = actual implementation with working code
+An **interface** says WHAT must exist (the method names and types).
+A **class** says HOW it works (the actual code).
 
-**Analogy:** An interface is like a restaurant menu listing what dishes are available. The class is the kitchen that actually cooks the food.
+**Analogy:** An interface is like a restaurant menu (listing what dishes exist). A class is the kitchen (actually cooking the food).
 
-```java
-// Interface: "Any contract must be able to tell me about motors"
-interface ElectricalContract {
-    CANMotorControllerInfo getMotor(String name);
-    boolean isMotorReady(String name);
-}
-
-// Implementation 1: Competition robot wiring
-class CompetitionContract implements ElectricalContract {
-    public CANMotorControllerInfo getMotor(String name) {
-        // Returns actual CAN IDs for the competition robot
-    }
-}
-
-// Implementation 2: Practice robot (different wiring!)
-class PracticeContract implements ElectricalContract {
-    public CANMotorControllerInfo getMotor(String name) {
-        // Returns different CAN IDs for the practice robot
-    }
-}
-
-// Your subsystem code uses the INTERFACE, not a specific implementation:
-ElectricalContract contract = ...;  // Could be either!
-contract.getMotor("LeftMotor");     // Works with either robot
+```
+Interface: "There will be a way to get the motor speed"
+Class: "Here is the code that gets the motor speed: return 0.5;"
 ```
 
-**Why this matters:** Your subsystem code does not care which robot it is on. It just asks the contract for motor info. Swap contracts and the same code works on any robot.
+**Why use interfaces:** You can swap implementations without changing the code that uses them.
+
+```java
+// Your subsystem uses the INTERFACE, not a specific class
+ElectricalContract contract;
+
+// It does not care WHICH contract it gets:
+contract = new CompetitionContract();  // Works on competition robot
+contract = new PracticeContract();     // Works on practice robot
+
+// Both work because both implement ElectricalContract
+double speed = contract.getMotorSpeed();
+```
 
 </details>
 
-## Annotations You Will See
+## Putting It All Together
 
-| Annotation | Meaning |
-|------------|---------|
-| `@Inject` | Dagger provides this dependency automatically |
-| `@Singleton` | Only ONE instance exists for the whole robot |
-| `@Override` | You are replacing a parent class method |
-| `@Component` | Dagger component - builds the dependency graph |
-| `@Module` | Dagger module - maps interfaces to implementations |
-| `@Binds` | Tells Dagger "when asked for X, give Y" |
-
-<details>
-<summary><strong>What are annotations?</strong></summary>
-
-**Annotations** are metadata -- extra information you attach to code that tools (like Dagger or the Java compiler) can read and act on.
-
-**Analogy:** Think of annotations like sticky notes on a document. The document works fine without them, but the sticky notes give special instructions to specific people.
+Here is how these concepts work together in a real robot class:
 
 ```java
-// Without annotation: Java treats this like any other method
-public ShooterSubsystem(ElectricalContract contract) { ... }
+// A subsystem that controls the robot's intake mechanism
+public class IntakeSubsystem extends BaseSubsystem {
 
-// With annotation: Dagger sees @Inject and knows to call this method automatically
-@Inject
-public ShooterSubsystem(ElectricalContract contract) { ... }
-```
+    // Fields: data this subsystem keeps track of
+    private final ElectricalContract contract;
+    private boolean isRunning;
 
-You do not need to create your own annotations. Just know what the existing ones mean when you see them.
+    // Constructor: set up the subsystem
+    public IntakeSubsystem(ElectricalContract contract) {
+        this.contract = contract;
+        this.isRunning = false;
+    }
 
-</details>
+    // Methods: what this subsystem can do
+    public void startIntake() {
+        if (contract.isIntakeReady()) {  // Check if hardware exists
+            isRunning = true;
+            System.out.println("Intake started");
+        }
+    }
 
-## Key Terms
+    public void stopIntake() {
+        isRunning = false;
+        System.out.println("Intake stopped");
+    }
 
-| Term | Meaning |
-|------|---------|
-| `this` | Reference to the current object |
-| `final` | Cannot be changed after assignment |
-| `private` | Only accessible inside this class |
-| `public` | Accessible from anywhere |
-| `abstract` | Cannot be instantiated directly; must be extended |
-
-<details>
-<summary><strong>What does `this` mean?</strong></summary>
-
-`this` refers to **the current object** -- the specific instance that the code is running on.
-
-**Why it is needed:** When a parameter has the same name as a field, `this` tells Java which one you mean.
-
-```java
-public class Motor {
-    private int port;  // This is the field (stored on the object)
-
-    public Motor(int port) {  // This "port" is the parameter
-        this.port = port;     // "this.port" = the field, "port" = the parameter
-        // Translation: "Set my port field to the port value you were given"
+    // Returns a value (not void!)
+    public boolean isRunning() {
+        return isRunning;
     }
 }
 ```
 
-**Analogy:** If someone named Alex is in a room with another Alex, saying "Alex, come here" is confusing. Saying "this Alex" (pointing) makes it clear. `this` is Java's way of pointing.
+## Key Terms Cheat Sheet
 
-</details>
+| Term | Meaning | Example |
+|------|---------|---------|
+| **Variable** | Stores a value | `int x = 5;` |
+| **Method** | A named block of code | `public void run() { }` |
+| **Class** | A blueprint for objects | `public class Motor { }` |
+| **Object** | An instance of a class | `new Motor(1)` |
+| **Constructor** | Runs when creating an object | `public Motor(int port) { }` |
+| **Field** | A variable inside a class | `private int port;` |
+| **Parameter** | An input to a method | `setPower(double power)` |
+| **extends** | Inheritance | `class A extends B` |
+| **implements** | Interface fulfillment | `class A implements B` |
+| **@Override** | Replacing a parent method | `@Override public void run()` |
+| **return** | Send a value back | `return 42;` |
+| **void** | Returns nothing | `public void stop()` |
+| **private** | Only accessible in this class | `private int x;` |
+| **public** | Accessible everywhere | `public int x;` |
+| **final** | Cannot be changed | `final int MAX = 100;` |
+| **this** | Refers to this object | `this.port = port;` |
 
 ---
 
 ## Quiz
 
-**Q1:** Which keyword is used for a class to inherit from another class?
+**Q1:** What does `extends` do in Java?
 
-- [ ] A) `implements`
-- [ ] B) `inherits`
-- [ ] C) `extends`
-- [ ] D) `super`
+- [ ] A) Makes the class run faster
+- [ ] B) Lets one class inherit from another
+- [ ] C) Deletes the parent class
+- [ ] D) Creates a new object
 
 <details>
 <summary>Answer</summary>
 
-**C) `extends`**
+**B) Lets one class inherit from another**
 
-**Why:** In Java, `extends` is the keyword used for class inheritance. `implements` is used for interfaces (not classes). `inherits` is not a Java keyword (some other languages use it). `super` is used to call the parent class's methods or constructor, but not to declare inheritance.
-
-```java
-class Child extends Parent { }       // Correct - class inheritance
-class Child implements Interface { } // Correct - interface implementation
-class Child inherits Parent { }      // WRONG - not valid Java
-```
+`extends` creates a parent-child relationship where the child class gets all the methods and fields of the parent. This lets you reuse code instead of writing it over and over.
 
 </details>
 
-**Q2:** What does the `@Override` annotation indicate?
+**Q2:** What is the difference between a class and an object?
 
-- [ ] A) The method is deprecated
-- [ ] B) You are replacing a parent class method
-- [ ] C) The method runs on the robot
-- [ ] D) The method is private
+- [ ] A) A class is a blueprint, an object is an actual instance
+- [ ] B) They are the same thing
+- [ ] C) An object is a blueprint, a class is an instance
+- [ ] D) Classes cannot have methods
 
 <details>
 <summary>Answer</summary>
 
-**B) You are replacing a parent class method**
+**A) A class is a blueprint, an object is an actual instance**
 
-**Why:** `@Override` tells the compiler "I intend to replace a method from the parent class." This is a safety check -- if you mistype the method name or use the wrong parameters, the compiler will warn you that you are not actually overriding anything. Option A is wrong because `@Deprecated` marks deprecated methods. Options C and D are unrelated to `@Override`.
-
-```java
-class Parent {
-    public void doThing() { }
-}
-
-class Child extends Parent {
-    @Override
-    public void doThing() { }  // Replaces Parent's doThing()
-}
-```
+A class defines the structure (like a cookie cutter). An object is an actual thing created from that class (like a cookie). You can create many objects from one class.
 
 </details>
 
 **Q3:** What is the difference between an interface and a class?
 
-- [ ] A) Interfaces can have method bodies
-- [ ] B) Classes define a contract; interfaces implement it
-- [ ] C) Interfaces define a contract; classes implement it
+- [ ] A) Interfaces define WHAT methods must exist, classes define HOW they work
+- [ ] B) Classes are faster than interfaces
+- [ ] C) Interfaces contain working code
 - [ ] D) There is no difference
 
 <details>
 <summary>Answer</summary>
 
-**C) Interfaces define a contract; classes implement it**
+**A) Interfaces define WHAT must exist, classes define HOW they work**
 
-**Why:** An interface only declares method signatures (what methods exist) without providing the actual code. A class provides the actual implementation (the working code). Option A is mostly wrong -- traditional interfaces cannot have method bodies (though Java 8+ allows default methods, which you will not use in FRC). Option B has it backwards. Option D is wrong because they serve very different purposes.
-
-```java
-// Interface: declares WHAT exists (the contract)
-interface MotorController {
-    void setPower(double power);  // No body - just the signature
-}
-
-// Class: provides HOW it works (the implementation)
-class SparkMax implements MotorController {
-    public void setPower(double power) {
-        // Actual code that sends power to the motor
-    }
-}
-```
+An interface is a contract that lists required methods (no code). A class provides the actual implementation. You use `implements` to connect a class to an interface.
 
 </details>
+

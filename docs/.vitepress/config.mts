@@ -1,15 +1,46 @@
 import { defineConfig } from 'vitepress'
 
+const coreProgrammingSidebar = [
+  {
+    text: 'Core Programming',
+    items: [
+      { text: 'Overview', link: '/core-programming/' },
+    ],
+  },
+  {
+    text: 'Patterns',
+    items: [
+      { text: 'Dependency Injection', link: '/core-programming/patterns/dependency-injection' },
+      { text: 'Providers & Factories', link: '/core-programming/patterns/providers-factories' },
+      { text: 'Command-Based Programming', link: '/core-programming/patterns/command-based' },
+      { text: 'Maintainers', link: '/core-programming/patterns/maintainers' },
+      { text: 'Swerve Drive', link: '/core-programming/patterns/swerve-drive' },
+      { text: 'Properties & Tuning', link: '/core-programming/patterns/properties-tuning' },
+    ],
+  },
+  {
+    text: 'Examples',
+    items: [
+      { text: 'Overview', link: '/core-programming/example/' },
+      { text: 'Elevator Logic', link: '/core-programming/example/elevator-logic' },
+      { text: 'Swerve Drive Command', link: '/core-programming/example/swerve-drive-command' },
+      { text: 'Simple Motor Subsystem', link: '/core-programming/example/simple-motor' },
+      { text: 'Maintainer Pattern', link: '/core-programming/example/maintainer-pattern' },
+    ],
+  },
+]
+
 export default defineConfig({
   base: '/Programming-Docs/',
   title: 'XBot Programming',
-  description: 'FRC Programming Documentaton for Team 488',
+  description: 'FRC Programming Documentation for Team 488',
   themeConfig: {
     logo: { src: '/xbot-logo.png', width: 24, height: 24 },
     nav: [
       { text: 'Curriculum', link: '/curriculum/' },
-      { text: 'Examples', link: '/examples/' },
+      { text: 'Core Programming', link: '/core-programming/' },
       { text: 'Tooling', link: '/tooling/' },
+      { text: 'Vision', link: '/vision/' },
     ],
     sidebar: {
       '/curriculum/': [
@@ -19,42 +50,22 @@ export default defineConfig({
             { text: 'Overview', link: '/curriculum/' },
             { text: 'Environment Setup', link: '/curriculum/01-environment-setup' },
             { text: 'Java Basics', link: '/curriculum/02-java-basics' },
-            { text: 'Git & GitHub', link: '/curriculum/03-git-github' },
+            { text: 'Object-Oriented Programming', link: '/curriculum/03-oop-concepts' },
+            { text: 'Git & GitHub Desktop', link: '/curriculum/04-git-github' },
           ],
         },
         {
           text: 'Robot Fundamentals',
           items: [
-            { text: 'Robot Architecture', link: '/curriculum/04-robot-architecture' },
-            { text: 'Electrical Contract', link: '/curriculum/05-electrical-contract' },
-            { text: 'Motor Control', link: '/curriculum/06-motor-control' },
-            { text: 'PID Logic', link: '/curriculum/07-pid-logic' },
-          ],
-        },
-        {
-          text: 'XBot Patterns',
-          items: [
-            { text: 'Dependency Injection', link: '/curriculum/08-dependency-injection' },
-            { text: 'Providers & Factories', link: '/curriculum/09-providers-factories' },
-            { text: 'Command-Based Programming', link: '/curriculum/10-command-based' },
-            { text: 'Maintainers', link: '/curriculum/11-maintainers' },
-            { text: 'Swerve Drive', link: '/curriculum/12-swerve-drive' },
-            { text: 'Properties & Tuning', link: '/curriculum/13-properties-tuning' },
+            { text: 'Robot Architecture', link: '/curriculum/05-robot-architecture' },
+            { text: 'Electrical Contract', link: '/curriculum/06-electrical-contract' },
+            { text: 'Motor Control', link: '/curriculum/07-motor-control' },
+            { text: 'PID Logic', link: '/curriculum/08-pid-logic' },
+            { text: 'Command-Based Programming', link: '/curriculum/09-command-based' },
           ],
         },
       ],
-      '/examples/': [
-        {
-          text: 'Code Examples',
-          items: [
-            { text: 'Overview', link: '/examples/' },
-            { text: 'Elevator Logic', link: '/examples/elevator-logic' },
-            { text: 'Swerve Drive Command', link: '/examples/swerve-drive-command' },
-            { text: 'Simple Motor Subsystem', link: '/examples/simple-motor' },
-            { text: 'Maintainer Pattern', link: '/examples/maintainer-pattern' },
-          ],
-        },
-      ],
+      '/core-programming/': coreProgrammingSidebar,
       '/tooling/': [
         {
           text: 'Tools & Setup',
@@ -67,6 +78,14 @@ export default defineConfig({
             { text: 'Gradle Commands', link: '/tooling/gradle-commands' },
             { text: 'AdvantageScope', link: '/tooling/advantagescope' },
             { text: 'QDriverStation', link: '/tooling/qdriverstation' },
+          ],
+        },
+      ],
+      '/vision/': [
+        {
+          text: 'Vision Programming',
+          items: [
+            { text: 'Overview', link: '/vision/' },
           ],
         },
       ],

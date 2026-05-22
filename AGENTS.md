@@ -9,15 +9,32 @@ docs/
 ├── .vitepress/
 │   └── config.mts          # VitePress config (sidebar, nav, theme)
 ├── index.md                # Landing page
-├── curriculum/             # 13 learning modules
+├── curriculum/             # 9 beginner-friendly learning modules
 │   ├── index.md            # Curriculum overview
-│   ├── 01-environment-setup.md
-│   ├── 02-java-basics.md
-│   └── ...
-├── examples/               # Code examples with GitHub links
+│   ├── 01-environment-setup.md   (Git, Git, GitHub Desktop, WPILib)
+│   ├── 02-java-basics.md        (Variables, methods, classes, resources)
+│   ├── 03-oop-concepts.md       (Encapsulation, inheritance, polymorphism)
+│   ├── 04-git-github.md         (GitHub Desktop workflow)
+│   ├── 05-robot-architecture.md (How robot code runs)
+│   ├── 06-electrical-contract.md (Wiring definitions)
+│   ├── 07-motor-control.md      (Motors + subsystem exercise)
+│   ├── 08-pid-logic.md          (PID control)
+│   └── 09-command-based.md      (Command framework basics)
+├── core-programming/       # Advanced XBot patterns + code examples
 │   ├── index.md
-│   ├── elevator-logic.md
-│   └── ...
+│   ├── patterns/           # XBot design patterns
+│   │   ├── dependency-injection.md
+│   │   ├── providers-factories.md
+│   │   ├── command-based.md
+│   │   ├── maintainers.md
+│   │   ├── swerve-drive.md
+│   │   └── properties-tuning.md
+│   └── example/            # Code examples with GitHub links
+│       ├── index.md
+│       ├── elevator-logic.md
+│       └── ...
+├── vision/                 # Future vision programming section
+│   └── index.md
 └── tooling/                # Tool guides
     ├── index.md
     ├── wpilib-overview.md
@@ -37,10 +54,15 @@ docs/
 - Quiz format: use `- [ ]` for options, `<details><summary>Answer</summary>...</details>` for answers
 - Include OS-specific instructions when relevant (Windows/macOS/Linux)
 
-### Example Pages (`docs/examples/`)
+### Example Pages (`docs/core-programming/example/`)
 - Always link to the live GitHub source
 - Show simplified code with comments
 - Explain the "why" behind patterns
+
+### Pattern Pages (`docs/core-programming/patterns/`)
+- Cover one design pattern per page
+- Link to source code in XBot repos
+- Explain trade-offs and when to use the pattern
 
 ### Tooling Pages (`docs/tooling/`)
 - Focus on practical usage, not theory
