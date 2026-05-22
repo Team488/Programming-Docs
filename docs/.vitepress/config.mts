@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  base: '/XBot-Documentation/',
+  base: '/Programming-Docs/',
   title: 'XBot Programming',
   description: 'FRC Programming Documentaton for Team 488',
   themeConfig: {
@@ -55,11 +55,11 @@ export default defineConfig({
           ],
         },
       ],
-  '/tooling/': [
+      '/tooling/': [
         {
           text: 'Tools & Setup',
           items: [
-        { text: 'Overview', link: '/tooling/' },
+            { text: 'Overview', link: '/tooling/' },
             { text: 'WPILib Overview', link: '/tooling/wpilib-overview' },
             { text: 'PathPlanner', link: '/tooling/pathplanner' },
             { text: 'Phoenix Tuner', link: '/tooling/phoenix-tuner' },
