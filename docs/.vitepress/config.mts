@@ -78,7 +78,7 @@ export default defineConfig({
       provider: 'local',
     },
     editLink: {
-      pattern: 'https://github.com/Team488/XBot-Documentation/edit/main/docs/:path',
+      pattern: 'https://github.com/Team488/Programming-Docs/edit/main/docs/:path',
       text: 'Edit this page on GitHub',
     },
     footer: {
