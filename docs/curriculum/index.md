@@ -23,6 +23,7 @@ Welcome to the XBot programming curriculum. You will go from writing your first 
 | [8. Motor Control](08-motor-control) | Controlling motors, building a MotorSubsystem | 30 min |
 | [9. PID Logic](09-pid-logic) | Automatic control with Proportional-Integral-Derivative | 30 min |
 | [10. Command-Based Programming](10-command-based) | WPILib framework for organizing robot behavior | 30 min |
+| [11. Operator Command Map](11-operator-command-map) | Binding gamepad buttons to commands | 20 min |
 
 ### What's Next?
 

@@ -19,7 +19,7 @@ hero:
       link: /tooling/
 features:
   - title: Curriculum
-    details: 10 modules from Java basics to robot control. Each section has a quiz to test your knowledge.
+    details: 11 modules from Java basics to robot control. Each section has a quiz to test your knowledge.
   - title: Real Code
     details: Examples pulled directly from TeamXbot2026, TeamXbot2025, and SeriouslyCommonLib.
   - title: Tooling

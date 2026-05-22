@@ -553,7 +553,99 @@ public record ScoringTask(
 
 Use records whenever you have data that you want to pass around without behavior.
 
-## 12. Functional Interfaces
+## 12. Builder Pattern
+
+The **Builder pattern** constructs complex objects step by step. Instead of a constructor with many parameters (hard to read, easy to mix up), you chain method calls that each set one property.
+
+```java
+// Without Builder: confusing constructor
+var pidProps = new XCANMotorControllerPIDProperties(
+    0.00005,  // p
+    0.0,      // i
+    0.0,      // d
+    0.0,      // f
+    1.0,      // maxPower
+    -1.0      // minPower
+);
+
+// With Builder: clear what each value means
+var pidProps = new XCANMotorControllerPIDProperties.Builder()
+    .p(0.00005)
+    .i(0)
+    .d(0)
+    .build();
+```
+
+### How It Works
+
+The builder has a method for each optional property. Each method returns `this` so calls can be chained. `build()` creates the final object.
+
+```java
+public class MotorConfig {
+    private final double p;
+    private final double i;
+    private final double d;
+
+    // Private constructor -- only the Builder can call it
+    private MotorConfig(double p, double i, double d) {
+        this.p = p; this.i = i; this.d = d;
+    }
+
+    public static class Builder {
+        private double p = 0;   // Default values
+        private double i = 0;
+        private double d = 0;
+
+        public Builder p(double val) { this.p = val; return this; }
+        public Builder i(double val) { this.i = val; return this; }
+        public Builder d(double val) { this.d = val; return this; }
+
+        public MotorConfig build() {
+            return new MotorConfig(p, i, d);
+        }
+    }
+}
+
+// Usage:
+var config = new MotorConfig.Builder()
+    .p(0.00005)
+    .d(0.01)
+    .build();
+```
+
+### Why XBot Uses Builders
+
+Many XBot configuration objects have 5-10+ optional parameters. A constructor with that many arguments is unreadable -- you would have to count positions to know what each value means. The builder makes every value self-documenting.
+
+```java
+// XBot real example: configuring a PID controller
+var pidProperties = new XCANMotorControllerPIDProperties.Builder()
+    .withVelocityFeedForward(0.01)
+    .withMaxPowerOutput(1.0)
+    .withMinPowerOutput(-1.0)
+    .build();
+
+// Another example: configuring swerve module limits
+var moduleConfig = new SwerveModuleConfig.Builder()
+    .wheelDiameter(Inches.of(4))
+    .driveGearRatio(6.75)
+    .steerGearRatio(12.8)
+    .maxVelocity(FeetPerSecond.of(15))
+    .build();
+```
+
+### When to Use the Builder Pattern
+
+| Use Builder | Don't Use Builder |
+|------------|-------------------|
+| 4+ constructor parameters | 1-2 simple parameters |
+| Many optional parameters | All parameters required |
+| Parameters where order is easy to mix up | Parameters where order is obvious |
+| Configuration objects (PID values, limits) | Simple data containers (use a Record instead) |
+
+Builders are overkill for simple objects. Use a Record for data holders with a few required fields, and a Builder for complex configuration objects with many optional fields.
+
+## 13. Functional Interfaces
 
 Functional interfaces are interfaces with a single method. They are the types that lambdas implement.
 
@@ -597,7 +689,7 @@ boolean anyRunning = motors.stream().anyMatch(isRunning);
 BooleanSupplier reverseLimit = () -> getPosition() < minHeight;
 ```
 
-## 13. Annotations You Will See
+## 14. Annotations You Will See
 
 | Annotation | What It Means | Where You See It |
 |-----------|---------------|------------------|
@@ -629,6 +721,7 @@ Annotations are metadata -- they don't change what the code does, but tools (Dag
 | **`var`** | Type inference | `var x = new ArrayList<>();` |
 | **`static`** | Belongs to the class, not an instance | `public static final double MAX = 1.0;` |
 | **Record** | Concise data carrier | `record Point(double x, double y)` |
+| **Builder** | Step-by-step object construction | `new Builder().p(1).i(0).build()` |
 | **Supplier** | Provides a value | `() -> Math.random()` |
 | **Consumer** | Accepts a value | `x -> System.out.println(x)` |
 

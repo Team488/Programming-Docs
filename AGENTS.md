@@ -20,7 +20,8 @@ docs/
 │   ├── 07-electrical-contract.md (Wiring definitions)
 │   ├── 08-motor-control.md      (Motors + subsystem exercise)
 │   ├── 09-pid-logic.md          (PID control)
-│   └── 10-command-based.md      (Command framework basics)
+│   ├── 10-command-based.md      (Command framework basics)
+│   └── 11-operator-command-map.md (Button bindings)
 ├── core-programming/       # Advanced XBot patterns + code examples
 │   ├── index.md
 │   ├── patterns/           # XBot design patterns

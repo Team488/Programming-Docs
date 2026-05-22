@@ -63,6 +63,7 @@ export default defineConfig({
             { text: 'Motor Control', link: '/curriculum/08-motor-control' },
             { text: 'PID Logic', link: '/curriculum/09-pid-logic' },
             { text: 'Command-Based Programming', link: '/curriculum/10-command-based' },
+            { text: 'Operator Command Map', link: '/curriculum/11-operator-command-map' },
           ],
         },
       ],
