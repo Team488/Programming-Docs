@@ -35,8 +35,8 @@ features:
 
 ## How to Use This Documentation
 
-1. **New to Java?** Start at [Environment Setup](/curriculum/01-environment-setup) and work through in order.
-2. **Know Java already?** Jump to [Robot Architecture](/curriculum/06-robot-architecture).
+1. **New to Java?** Start at [Environment Setup](/curriculum/environment-setup) and work through in order.
+2. **Know Java already?** Jump to [Robot Architecture](/curriculum/robot-architecture).
 3. **Need examples?** Check the [Examples](/core-programming/example/) section for real code from our robots.
 4. **Setting up tools?** See the [Tooling](/tooling/) section.
 
