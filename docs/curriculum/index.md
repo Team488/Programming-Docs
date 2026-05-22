@@ -12,16 +12,17 @@ Welcome to the XBot programming curriculum. You will go from writing your first 
 | [1. Environment Setup](01-environment-setup) | Install Java, VSCode, WPILib, Git, GitHub Desktop | 30 min |
 | [2. Java Basics](02-java-basics) | Variables, methods, classes, interfaces | 45 min |
 | [3. Object-Oriented Programming](03-oop-concepts) | Encapsulation, inheritance, polymorphism, abstraction | 30 min |
-| [4. Git & GitHub Desktop](04-git-github) | Clone, commit, branches, pull requests | 30 min |
+| [4. Intermediate Java](04-intermediate-java) | Generics, lambdas, Optional, collections, streams, enums | 40 min |
+| [5. Git & GitHub Desktop](05-git-github) | Clone, commit, branches, pull requests | 30 min |
 
 ### Robot Fundamentals
 | Module | What You Will Learn | Time |
 |--------|-------------------|------|
-| [5. Robot Architecture](05-robot-architecture) | How the robot program runs and is organized | 20 min |
-| [6. Electrical Contract](06-electrical-contract) | Wiring definitions as code | 20 min |
-| [7. Motor Control](07-motor-control) | Controlling motors, building a MotorSubsystem | 30 min |
-| [8. PID Logic](08-pid-logic) | Automatic control with Proportional-Integral-Derivative | 30 min |
-| [9. Command-Based Programming](09-command-based) | WPILib framework for organizing robot behavior | 30 min |
+| [6. Robot Architecture](06-robot-architecture) | How the robot program runs and is organized | 20 min |
+| [7. Electrical Contract](07-electrical-contract) | Wiring definitions as code | 20 min |
+| [8. Motor Control](08-motor-control) | Controlling motors, building a MotorSubsystem | 30 min |
+| [9. PID Logic](09-pid-logic) | Automatic control with Proportional-Integral-Derivative | 30 min |
+| [10. Command-Based Programming](10-command-based) | WPILib framework for organizing robot behavior | 30 min |
 
 ### What's Next?
 

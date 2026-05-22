@@ -9,17 +9,18 @@ docs/
 ├── .vitepress/
 │   └── config.mts          # VitePress config (sidebar, nav, theme)
 ├── index.md                # Landing page
-├── curriculum/             # 9 beginner-friendly learning modules
+├── curriculum/             # 10 beginner-friendly learning modules
 │   ├── index.md            # Curriculum overview
 │   ├── 01-environment-setup.md   (Git, Git, GitHub Desktop, WPILib)
 │   ├── 02-java-basics.md        (Variables, methods, classes, resources)
 │   ├── 03-oop-concepts.md       (Encapsulation, inheritance, polymorphism)
-│   ├── 04-git-github.md         (GitHub Desktop workflow)
-│   ├── 05-robot-architecture.md (How robot code runs)
-│   ├── 06-electrical-contract.md (Wiring definitions)
-│   ├── 07-motor-control.md      (Motors + subsystem exercise)
-│   ├── 08-pid-logic.md          (PID control)
-│   └── 09-command-based.md      (Command framework basics)
+│   ├── 04-intermediate-java.md  (Generics, lambdas, Optional, streams, enums)
+│   ├── 05-git-github.md         (GitHub Desktop workflow)
+│   ├── 06-robot-architecture.md (How robot code runs)
+│   ├── 07-electrical-contract.md (Wiring definitions)
+│   ├── 08-motor-control.md      (Motors + subsystem exercise)
+│   ├── 09-pid-logic.md          (PID control)
+│   └── 10-command-based.md      (Command framework basics)
 ├── core-programming/       # Advanced XBot patterns + code examples
 │   ├── index.md
 │   ├── patterns/           # XBot design patterns

@@ -19,7 +19,7 @@ hero:
       link: /tooling/
 features:
   - title: Curriculum
-    details: 9 modules from Java basics to robot control. Each section has a quiz to test your knowledge.
+    details: 10 modules from Java basics to robot control. Each section has a quiz to test your knowledge.
   - title: Real Code
     details: Examples pulled directly from TeamXbot2026, TeamXbot2025, and SeriouslyCommonLib.
   - title: Tooling
@@ -36,7 +36,7 @@ features:
 ## How to Use This Documentation
 
 1. **New to Java?** Start at [Environment Setup](/curriculum/01-environment-setup) and work through in order.
-2. **Know Java already?** Jump to [Robot Architecture](/curriculum/05-robot-architecture).
+2. **Know Java already?** Jump to [Robot Architecture](/curriculum/06-robot-architecture).
 3. **Need examples?** Check the [Examples](/core-programming/example/) section for real code from our robots.
 4. **Setting up tools?** See the [Tooling](/tooling/) section.
 
