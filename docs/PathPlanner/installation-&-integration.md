@@ -18,8 +18,8 @@ maven { url "https://3015rangerrobotics.github.io/pathplannerlib/repo"}
 
 PathPlanner is configured in the robot initialization:
 
-```java
-// In Robot.java
+In Robot.java:
+```
 getInjectorComponent().configurePathPlannerLib();
 ```
 
@@ -44,10 +44,10 @@ PathPlannerAuto auto = new PathPlannerAuto("MyAutoPath");
 
 ## Key Concepts
 
-| Concept | Description |
-|---------|-------------|
-| **Waypoint** | A point the robot path passes through |
-| **Constraint** | Max speed and acceleration for a path segment |
-| **Event** | Triggers a command at a specific point on the path |
-| **Holonomic** | Uses swerve's ability to rotate independently while moving |
-| **Choreo** | Alternative path planner (also supported by WPILib) |
+| Concept        | Description                                                |
+|----------------|------------------------------------------------------------|
+| **Waypoint**   | A point the robot path passes through                      |
+| **Constraint** | Max speed and acceleration for a path segment              |
+| **Event**      | Triggers a command at a specific point on the path         |
+| **Holonomic**  | Uses swerve's ability to rotate independently while moving |
+| **Choreo**     | Alternative path planner (also supported by WPILib)        |
