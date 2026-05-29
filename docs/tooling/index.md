@@ -7,7 +7,6 @@ Tools you'll use to build, deploy, tune, and debug robot code.
 | Tool | Purpose | Guide |
 |------|---------|-------|
 | **WPILib** | Core FRC library | [WPILib Overview](wpilib-overview) |
-| **PathPlanner** | Autonomous path creation | [PathPlanner](pathplanner) |
 | **Phoenix Tuner** | CTRE device configuration | [Phoenix Tuner](phoenix-tuner) |
 | **VSCode** | Code editor | [VSCode Keybinds](vscode-keybinds) |
 | **Gradle** | Build system | [Gradle Commands](gradle-commands) |
