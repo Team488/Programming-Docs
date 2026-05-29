@@ -1,8 +1,6 @@
 # PathPlanner Overview
 
-PathPlanner is a motion‑planning tool used in FRC to create autonomous paths and full autonomous routines.
-It allows teams to design smooth, 
-constraint‑aware trajectories and embed event markers that trigger robot commands during autonomous.
+PathPlanner is a motion‑planning tool used in FRC to create autonomous paths and full autonomous routines. It allows teams to design smooth, constraint‑aware trajectories and embed event markers that trigger robot commands during autonomous.
 
 ## Why PathPlanner?
 - Visual path creation
