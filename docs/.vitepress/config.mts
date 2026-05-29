@@ -66,6 +66,15 @@ export default defineConfig({
             { text: 'Operator Command Map', link: '/curriculum/operator-command-map' },
           ],
         },
+        {
+          text: 'AI Tools',
+          items: [
+            { text: 'AI Tools Setup', link: '/curriculum/12-ai-tools-setup' },
+            { text: 'Built-in Commands', link: '/curriculum/13-ai-tools-commands' },
+            { text: 'Workflow Tips', link: '/curriculum/14-ai-tools-workflow' },
+            { text: 'Responsible AI Use', link: '/curriculum/15-responsible-ai' },
+          ],
+        },
       ],
       '/core-programming/': coreProgrammingSidebar,
       '/tooling/': [

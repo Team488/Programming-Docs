@@ -64,6 +64,8 @@ graph LR
 #### 1. Pull Latest Changes
 Before you start working, get the latest code from your team.
 
+**AI tip:** If you use AI tools (like OpenCode) to help write code, always commit your changes before asking the AI for help. That way, you can undo anything you do not like.
+
 **GitHub Desktop:** Click **Fetch origin** (top right), then **Pull origin** if there are new changes.
 
 #### 2. Create a Branch

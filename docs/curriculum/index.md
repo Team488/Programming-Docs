@@ -25,6 +25,14 @@ Welcome to the XBot programming curriculum. You will go from writing your first 
 | [10. Command-Based Programming](command-based) | WPILib framework for organizing robot behavior | 30 min |
 | [11. Operator Command Map](operator-command-map) | Binding gamepad buttons to commands | 20 min |
 
+### AI Tools
+| Module | What You Will Learn | Time |
+|--------|-------------------|------|
+| [12. AI Tools Setup](12-ai-tools-setup) | Configure and initialize OpenCode | 15 min |
+| [13. AI Tools: Built-in Commands](13-ai-tools-commands) | Slash commands, undo, share, custom commands | 10 min |
+| [14. AI Tools: Workflow Tips](14-ai-tools-workflow) | Writing prompts, Plan vs Build mode | 10 min |
+| [15. Responsible AI Use](15-responsible-ai) | Ethics, code review, simulation, safety | 15 min |
+
 ### What's Next?
 
 After finishing the curriculum, move on to [Core Programming](/core-programming/) to learn advanced XBot patterns like dependency injection, factories, maintainers, and swerve drive.

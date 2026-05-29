@@ -121,6 +121,38 @@ Both control the same thing -- GitHub Desktop just gives you buttons and menus i
 
 </details>
 
+## Install OpenCode (AI Coding Assistant)
+
+OpenCode is an AI coding assistant that helps you write, understand, and debug robot code. It runs in your terminal.
+
+### Install OpenCode
+
+```bash
+curl -fsSL https://opencode.ai/install | bash
+```
+
+Or using a package manager:
+
+```bash
+# npm
+npm install -g opencode-ai
+
+# macOS (Homebrew)
+brew install anomalyco/tap/opencode
+
+# Arch Linux
+sudo pacman -S opencode
+
+# Windows (Chocolatey)
+choco install opencode
+```
+
+### Windows Users
+
+For the best experience, use [WSL (Windows Subsystem for Linux)](https://learn.microsoft.com/en-us/windows/wsl/install). OpenCode works best in a Unix-like environment.
+
+You will learn how to configure and use OpenCode in Module 12.
+
 ## Verify Everything Works
 
 1. Open VSCode
