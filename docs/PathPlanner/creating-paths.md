@@ -1,6 +1,9 @@
 # Creating Paths and Autos in PathPlanner
 
-This guide explains how to create paths, configure constraints, add event markers, and build full autonomous routines using the PathPlanner GUI.
+This guide explains how to create paths, 
+configure constraints, 
+add event markers, 
+and build full autonomous routines using the PathPlanner GUI.
 
 ---
 

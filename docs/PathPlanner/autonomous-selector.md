@@ -1,7 +1,8 @@
 # Adding Autonomous Routines to the OperatorCommandMap
 
 XBOT does not use a traditional WPILib `SendableChooser` for autonomous selection.  
-Instead, it provides a higher‑level system built around the **OperatorCommandMap** and **AutonomousCommandProvider** classes.
+Instead, it provides a higher‑level system built around the 
+**OperatorCommandMap** and **AutonomousCommandProvider** classes.
 
 This system allows you to:
 - Register autonomous routines
@@ -37,16 +38,19 @@ Once configured, the auto is automatically added to the XBOT auto selector.
 # Registering the Auto with OperatorCommandMap
 
 ### Use the AutonomousCommandProvider to register the auto:
-```java
-var shootFromHub = setAutonomousCommandProvider.get();
-shootFromHub.setAutoCommand(shootFromHubCommandGroup, Landmarks.blueStartTrenchToOutpost);
-shootFromHub.includeOnSmartDashboard("Shoot from hub.");
+```
+Here is an example of registering a single auto routine:
+
+var hubToDepoToTower = setAutonomousCommandProvider.get();
+hubToDepoToTower.setAutoCommand(AutoBuilder.buildAuto("HubToDepoToTower"));
+hubToDepoToTower.includeOnSmartDashboard("Hub to Depo to Tower Auto");
 ```
 ### Breakdown:
 
-#### 1. setAutoCommand(command, landmark)
-- `command`: The command or command group to run during autonomous.
-- `landmark`: The starting position on the field.
+#### 1. setAutoCommand(AutoBuilder.buildAuto("AutoName"));
+- `AutoBuilder`: A utility class used to build auto routines.
+- `.buildAuto("AutoName")`: Builds an auto routine based on the name of an auto you created in the PathPlanner GUI.
+  - The string you pass must match the name of an auto in your PathPlanner project.
 
 #### 2. includeOnSmartDashboard("Name")
 - Adds the auto to:
@@ -58,7 +62,9 @@ The string you pass becomes the selectable name.
 ## Adding Multiple Autos
 
 You can register as many autos as you want:
-```java
+```
+Here is an example of registering multiple autonomous programs:
+
 var moveAcrossField = setAutonomousCommandProvider.get();
 moveAcrossField.setAutoCommand(moveAcrossFieldCommand, Landmarks.blueStartTrenchToOutpost);
 moveAcrossField.includeOnSmartDashboard("Move midway through field and back.");
