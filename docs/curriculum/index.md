@@ -28,10 +28,10 @@ Welcome to the XBot programming curriculum. You will go from writing your first 
 ### AI Tools
 | Module | What You Will Learn | Time |
 |--------|-------------------|------|
-| [12. AI Tools Setup](12-ai-tools-setup) | Configure and initialize OpenCode | 15 min |
-| [13. AI Tools: Built-in Commands](13-ai-tools-commands) | Slash commands, undo, share, custom commands | 10 min |
-| [14. AI Tools: Workflow Tips](14-ai-tools-workflow) | Writing prompts, Plan vs Build mode | 10 min |
-| [15. Responsible AI Use](15-responsible-ai) | Ethics, code review, simulation, safety | 15 min |
+| [12. AI Tools Setup](ai-tools-setup) | Configure and initialize OpenCode | 15 min |
+| [13. AI Tools: Built-in Commands](ai-tools-commands) | Slash commands, undo, share, custom commands | 10 min |
+| [14. AI Tools: Workflow Tips](ai-tools-workflow) | Writing prompts, Plan vs Build mode | 10 min |
+| [15. Responsible AI Use](responsible-ai) | Ethics, code review, simulation, safety | 15 min |
 
 ### What's Next?
 
