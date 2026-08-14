@@ -85,7 +85,9 @@ export default defineConfig({
             { text: 'WPILib Overview', link: '/tooling/wpilib-overview' },
             { text: 'PathPlanner', link: '/tooling/pathplanner' },
             { text: 'Phoenix Tuner', link: '/tooling/phoenix-tuner' },
+            { text: 'IntelliJ Idea'} link: '/tooling/intellij'},
             { text: 'VSCode Keybinds', link: '/tooling/vscode-keybinds' },
+            { text: 'Maplesim', link: '/tooling/maplesim'}
             { text: 'Gradle Commands', link: '/tooling/gradle-commands' },
             { text: 'AdvantageScope', link: '/tooling/advantagescope' },
             { text: 'QDriverStation', link: '/tooling/qdriverstation' },
