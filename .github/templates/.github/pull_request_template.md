@@ -1,9 +1,9 @@
-# Whats changing?
+## What's changing?
 
-# Questions/notes for reviewers
+## Questions/notes for reviewers
 
-# How did you test this?    
+## How did you test this?    
 
-# Vibecoded?
+## Vibecoded?
 - [ ] Yes
-- [] No
+- [ ] No
