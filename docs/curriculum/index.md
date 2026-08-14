@@ -9,29 +9,29 @@ Welcome to the XBot programming curriculum. You will go from writing your first 
 ### Getting Started
 | Module | What You Will Learn | Time |
 |--------|-------------------|------|
-| [1. Environment Setup](environment-setup) | Install Java, VSCode, WPILib, Git, GitHub Desktop | 30 min |
-| [2. Java Basics](java-basics) | Variables, methods, classes, interfaces | 45 min |
-| [3. Object-Oriented Programming](oop-concepts) | Encapsulation, inheritance, polymorphism, abstraction | 30 min |
-| [4. Intermediate Java](intermediate-java) | Generics, lambdas, Optional, collections, streams, enums | 40 min |
-| [5. Git & GitHub Desktop](git-github) | Clone, commit, branches, pull requests | 30 min |
+| [1. Environment Setup](getting-started/environment-setup) | Install Java, VSCode, WPILib, Git, GitHub Desktop | 30 min |
+| [2. Java Basics](getting-started/java-basics) | Variables, methods, classes, interfaces | 45 min |
+| [3. Object-Oriented Programming](getting-started/oop-concepts) | Encapsulation, inheritance, polymorphism, abstraction | 30 min |
+| [4. Intermediate Java](getting-started/intermediate-java) | Generics, lambdas, Optional, collections, streams, enums | 40 min |
+| [5. Git & GitHub Desktop](getting-started/git-github) | Clone, commit, branches, pull requests | 30 min |
 
 ### Robot Fundamentals
 | Module | What You Will Learn | Time |
 |--------|-------------------|------|
-| [6. Robot Architecture](robot-architecture) | How the robot program runs and is organized | 20 min |
-| [7. Electrical Contract](electrical-contract) | Wiring definitions as code | 20 min |
-| [8. Motor Control](motor-control) | Controlling motors, building a MotorSubsystem | 30 min |
-| [9. PID Logic](pid-logic) | Automatic control with Proportional-Integral-Derivative | 30 min |
-| [10. Command-Based Programming](command-based) | WPILib framework for organizing robot behavior | 30 min |
-| [11. Operator Command Map](operator-command-map) | Binding gamepad buttons to commands | 20 min |
+| [6. Robot Architecture](robot-fundamentals/robot-architecture) | How the robot program runs and is organized | 20 min |
+| [7. Electrical Contract](robot-fundamentals/electrical-contract) | Wiring definitions as code | 20 min |
+| [8. Motor Control](robot-fundamentals/motor-control) | Controlling motors, building a MotorSubsystem | 30 min |
+| [9. PID Logic](robot-fundamentals/pid-logic) | Automatic control with Proportional-Integral-Derivative | 30 min |
+| [10. Command-Based Programming](robot-fundamentals/command-based) | WPILib framework for organizing robot behavior | 30 min |
+| [11. Operator Command Map](robot-fundamentals/operator-command-map) | Binding gamepad buttons to commands | 20 min |
 
 ### AI Tools
 | Module | What You Will Learn | Time |
 |--------|-------------------|------|
-| [12. AI Tools Setup](ai-tools-setup) | Configure and initialize OpenCode | 15 min |
-| [13. AI Tools: Built-in Commands](ai-tools-commands) | Slash commands, undo, share, custom commands | 10 min |
-| [14. AI Tools: Workflow Tips](ai-tools-workflow) | Writing prompts, Plan vs Build mode | 10 min |
-| [15. Responsible AI Use](responsible-ai) | Ethics, code review, simulation, safety | 15 min |
+| [12. AI Tools Setup](ai-tools/ai-tools-setup) | Configure and initialize OpenCode | 15 min |
+| [13. AI Tools: Built-in Commands](ai-tools/ai-tools-commands) | Slash commands, undo, share, custom commands | 10 min |
+| [14. AI Tools: Workflow Tips](ai-tools/ai-tools-workflow) | Writing prompts, Plan vs Build mode | 10 min |
+| [15. Responsible AI Use](ai-tools/responsible-ai) | Ethics, code review, simulation, safety | 15 min |
 
 ### What's Next?
 
