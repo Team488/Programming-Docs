@@ -2,9 +2,12 @@
 
 Welcome to the XBot programming curriculum. You will go from writing your first Java code to making a robot drive itself.
 
-**No programming experience?** Start here. The curriculum assumes you know nothing about programming and teaches you everything step by step. [Java Basics](getting-started/java-basics) covers the minimum you need to begin, and the [Java track](#java-track) below goes deeper when you want it.
+**Everyone starts here**, whatever your programming background. Do the [Setup](#setup) steps, then work through the [Challenges](#challenges) in order -- each one builds on the one before it. The robot concepts are new to almost everybody.
 
-Work through the steps in order. Each challenge builds on the one before it.
+What changes with experience is how much Java reading you do along the way:
+
+- **New to programming?** The curriculum assumes you know nothing and teaches you step by step. Read [Java Basics](getting-started/java-basics) before starting the challenges, and dip into the [Java track](#java-track) as you go.
+- **Already know some Java?** Skim [Java Basics](getting-started/java-basics) for the conventions we use, skip the Java track, and go straight to the challenges.
 
 ## Setup
 
