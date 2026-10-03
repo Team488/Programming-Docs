@@ -2,7 +2,7 @@
 
 Welcome to the XBot programming curriculum. You will go from writing your first Java code to making a robot drive itself.
 
-**No programming experience?** Start here. The curriculum assumes you know nothing about programming and teaches you everything step by step.
+**No programming experience?** Start here. The curriculum assumes you know nothing about programming and teaches you everything step by step. [Java Basics](getting-started/java-basics) covers the minimum you need to begin, and the [Java track](#java-track) below goes deeper when you want it.
 
 Work through the steps in order. Each challenge builds on the one before it.
 
@@ -26,6 +26,17 @@ Background you will be pointed at from the challenges, and can come back to any 
 | [Mapping Buttons to Commands](robot-fundamentals/operator-command-map) | Binding commands to gamepad buttons |
 | [Git Introduction](getting-started/git-introduction) | What source control is, and the terms you will see |
 | [Clone with GitHub Desktop](getting-started/clone-with-github-desktop) | Getting a copy of a repository onto your computer |
+
+## Java track
+
+[Java Basics](getting-started/java-basics) is deliberately short -- just enough to start driving a robot. These two pages go further, and you can work through them alongside the challenges rather than before them.
+
+| Page | What It Covers |
+|------|----------------|
+| [Object-Oriented Programming](getting-started/oop-concepts) | Encapsulation, inheritance, polymorphism, abstraction |
+| [Intermediate Java](getting-started/intermediate-java) | Generics, lambdas, Optional, collections, streams, enums |
+
+Of the two, get comfortable with **classes and objects** before the [Auto-stopping Collector](challenges/auto-stopping-collector) challenge -- that is the first time you write a class from scratch rather than filling in a method.
 
 ## Challenges
 
