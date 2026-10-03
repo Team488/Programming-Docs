@@ -67,6 +67,21 @@ export default defineConfig({
           ],
         },
         {
+          text: 'Challenges',
+          items: [
+            { text: 'Basic Robot Principles', link: '/curriculum/challenges/basic-robot-principles' },
+            { text: 'Tank Drive', link: '/curriculum/challenges/tank-drive' },
+            { text: 'Altering Tank Drive', link: '/curriculum/challenges/altering-tank-drive' },
+            { text: 'Moving to a Target Position', link: '/curriculum/challenges/moving-to-a-target-position' },
+            { text: 'Making a Pull Request', link: '/curriculum/challenges/making-a-pull-request' },
+            { text: 'Rotating to a Target Orientation', link: '/curriculum/challenges/rotating-to-a-target-orientation' },
+            { text: 'Command Groups', link: '/curriculum/challenges/command-groups' },
+            { text: 'Upgrading Using the SeriouslyCommonLib', link: '/curriculum/challenges/upgrading-using-seriouslycommonlib' },
+            { text: 'Running on a Real Robot', link: '/curriculum/challenges/running-on-a-real-robot' },
+            { text: 'Auto-stopping Collector', link: '/curriculum/challenges/auto-stopping-collector' },
+          ],
+        },
+        {
           text: 'AI Tools',
           items: [
             { text: 'AI Tools Setup', link: '/curriculum/ai-tools/ai-tools-setup' },

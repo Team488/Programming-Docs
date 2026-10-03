@@ -25,6 +25,23 @@ Welcome to the XBot programming curriculum. You will go from writing your first 
 | [10. Command-Based Programming](robot-fundamentals/command-based) | WPILib framework for organizing robot behavior | 30 min |
 | [11. Operator Command Map](robot-fundamentals/operator-command-map) | Binding gamepad buttons to commands | 20 min |
 
+### Challenges
+
+Hands-on exercises in the [XbotEdu](https://github.com/Team488/XbotEdu) practice project. Each one has unit tests, so you can check your own work without a robot. Tackle them in order.
+
+| Challenge | What You Will Build | Time |
+|--------|-------------------|------|
+| [Basic Robot Principles](challenges/basic-robot-principles) | Watch the command scheduler run, and see commands conflict | 30 min |
+| [Tank Drive](challenges/tank-drive) | Drive a robot with two joysticks | 1-2 hrs |
+| [Altering Tank Drive](challenges/altering-tank-drive) | Precision mode and arcade drive, mapped to buttons | 1-2 hrs |
+| [Moving to a Target Position](challenges/moving-to-a-target-position) | Drive to an exact distance and stop there | 2 hrs |
+| [Making a Pull Request](challenges/making-a-pull-request) | Submit your work for review | 30 min |
+| [Rotating to a Target Orientation](challenges/rotating-to-a-target-orientation) | Turn to a heading, including the tricky angle math | 2 hrs |
+| [Command Groups](challenges/command-groups) | Combine commands into an autonomous square | 1-2 hrs |
+| [Upgrading Using the SeriouslyCommonLib](challenges/upgrading-using-seriouslycommonlib) | Replace your own control code with the team's library | 1-2 hrs |
+| [Running on a Real Robot](challenges/running-on-a-real-robot) | Deploy your code to a RoboRIO | 1 hr |
+| [Auto-stopping Collector](challenges/auto-stopping-collector) | Build a subsystem and commands from scratch | 2-3 hrs |
+
 ### AI Tools
 | Module | What You Will Learn | Time |
 |--------|-------------------|------|
