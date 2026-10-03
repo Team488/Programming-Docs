@@ -2,6 +2,52 @@
 
 Creating objects that need runtime parameters.
 
+## What's a Factory?
+
+A **Factory** is a class whose only job is to create instances of other objects.
+
+Some objects are a chore to build. Take a `Car`: to create one you need its Wheels, Doors, Windshield and so on. You would not want to assemble all of those by hand every time you needed a car.
+
+```java
+public class Car {
+  public Car(Wheel frontLeft, Wheel frontRight, Wheel rearLeft, Wheel rearRight, ...) {
+    // ...
+  }
+}
+```
+
+A factory hides that work behind one call:
+
+```java
+public class CarFactory {
+  public static Car create() {
+    Wheel frontLeftWheel = new Wheel();
+    Wheel frontRightWheel = new Wheel();
+    // .. create all other car parts ..
+    return new Car(frontLeftWheel, frontRightWheel, ...);
+  }
+
+  // A factory can also make variations
+  public static Car createSillyCar() {
+    // .. same idea, but with SquareWheel instead ..
+  }
+}
+```
+
+```java
+Car myCar = CarFactory.create();
+Car mySillyCar = CarFactory.createSillyCar();
+```
+
+**You have already used one of these.** Back in the Tank Drive challenge, `DriveSubsystem` got its motors from a factory rather than constructing them itself:
+
+```java
+this.frontLeft = motorControllerFactory
+        .create(new CANMotorControllerInfo("FrontLeft", 1), this.getPrefix(), "FrontLeft");
+```
+
+The rest of this page is about *why* XBot builds objects this way, and how the factories are wired up.
+
 ## The Problem
 
 [Source: SeriouslyCommonLib PIDManager](https://github.com/Team488/SeriouslyCommonLib/blob/main/src/main/java/xbot/common/math/PIDManager.java)
@@ -128,6 +174,8 @@ The key insight: **Dagger provides the factory, you provide the runtime values.*
 | `HeadingModule.HeadingModuleFactory` | Heading PID modules |
 | `XDigitalInput.XDigitalInputFactory` | Digital sensors |
 | `XLaserCAN.XLaserCANFactory` | Laser distance sensors |
+| `XGyro.XGyroFactory` | Gyros |
+| `XSolenoid.XSolenoidFactory` | Solenoids |
 
 ## Usage Pattern
 

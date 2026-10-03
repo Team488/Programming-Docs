@@ -51,7 +51,7 @@ Without DI, you would create dependencies manually:
 ```java
 // BAD: Hard to test, tightly coupled
 // Every dependency is hardcoded inside the class
-public class ShooterSubsystem() {
+public class ShooterSubsystem {
     private ElectricalContract contract = new CompetitionContract();  // Always this contract
     private PIDManager pid = new PIDManager(...);                      // Always these values
     private MotorController motor = new TalonFX(...);                  // Always this motor type
@@ -266,6 +266,88 @@ Dagger builds this chain:
 ```
 
 If Dagger cannot find a way to provide a dependency, you get a **compile error** (not a runtime crash). This is much better than discovering the problem when the robot is on the field.
+
+</details>
+
+Handing a class what it needs through its constructor, rather than letting it build its own dependencies, is called **constructor injection**. Every `@Inject` constructor you have written is an example of it.
+
+### 4. Real hardware vs. mocks
+
+This is where dependency injection earns its keep, and it is the reason your unit tests can run on a laptop with no robot attached.
+
+There are two components, built from different modules:
+
+[Source: XbotEdu injection components](https://github.com/Team488/XbotEdu/tree/main/src/main/java/competition/injection/components)
+
+```java
+// On a real robot: real motors, real gamepads
+@Singleton
+@Component(modules = { RobotModule.class, RealDevicesModule.class,
+                       RealControlsModule.class, CompetitionModule.class })
+public abstract class RobotComponent extends BaseRobotComponent { }
+
+// In simulation and unit tests: fake devices
+@Singleton
+@Component(modules = { SimulationModule.class, MockDevicesModule.class,
+                       RealControlsModule.class, SimulatedRobotModule.class })
+public abstract class SimulationComponent extends BaseRobotComponent { }
+```
+
+Both extend the same `BaseRobotComponent`, so both can produce the same list of objects -- they just build them from different parts. `Robot.java` picks one at startup:
+
+```java
+protected BaseRobotComponent createDaggerComponent() {
+    if (BaseRobot.isReal()) {
+        return DaggerRobotComponent.create();
+    } else {
+        return DaggerSimulationComponent.create();
+    }
+}
+```
+
+The swap itself lives in the modules. `MockDevicesModule` binds the same factory interface to a mock implementation:
+
+[Source: SeriouslyCommonLib MockDevicesModule](https://github.com/Team488/SeriouslyCommonLib/blob/main/src/main/java/xbot/common/injection/modules/MockDevicesModule.java)
+
+```java
+@Module
+public abstract class MockDevicesModule {
+    // "When anything asks for a motor controller factory, hand it the mock one"
+    @Binds
+    @Singleton
+    public abstract XCANMotorController.XCANMotorControllerFactory getMotorControllerFactory(
+            MockCANMotorController.MockCANMotorControllerFactory impl);
+}
+```
+
+**The payoff:** `DriveSubsystem` asks for an `XCANMotorControllerFactory` and never learns which kind it got. On the robot it receives real motors; in your tests it receives fake ones. The subsystem code does not change, and there is no `if (testMode)` branch anywhere in it.
+
+<details>
+<summary><strong>How do tests get objects out of Dagger?</strong></summary>
+
+A test asks the component for what it needs, instead of calling `new`:
+
+```java
+public class TankDriveTest extends BaseDriveTest {
+    @Test
+    public void test() {
+        BaseCommand command = this.getInjectorComponent().tankDriveWithJoysticksCommand();
+        // ... the command arrives fully wired, with mock hardware underneath
+    }
+}
+```
+
+For that to compile, the component has to expose the type. `BaseRobotComponent` declares one abstract method per object a test can request:
+
+```java
+public abstract class BaseRobotComponent extends BaseComponent {
+    public abstract TankDriveWithJoysticksCommand tankDriveWithJoysticksCommand();
+    public abstract DriveToPositionCommand driveToPositionCommand();
+    // ... one line per directly-requestable object
+}
+```
+
+Most classes never need an entry here -- an `@Inject` constructor is enough for Dagger to build them as a dependency of something else. You only add a line when a test (or `Robot.java`) needs to ask for that object **directly**.
 
 </details>
 
