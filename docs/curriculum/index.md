@@ -4,10 +4,27 @@ Welcome to the XBot programming curriculum. You will go from writing your first 
 
 **Everyone starts here**, whatever your programming background. Do the [Setup](#setup) steps, then work through the [Challenges](#challenges) in order -- each one builds on the one before it. The robot concepts are new to almost everybody.
 
-What changes with experience is how much Java reading you do along the way:
+## Do I know enough Java?
 
-- **New to programming?** The curriculum assumes you know nothing and teaches you step by step. Read [Java Basics](getting-started/java-basics) before starting the challenges, and dip into the [Java track](#java-track) as you go.
-- **Already know some Java?** Skim [Java Basics](getting-started/java-basics) for the conventions we use, skip the Java track, and go straight to the challenges.
+This curriculum teaches **robot programming**, not the Java language. It assumes you can already:
+
+- read and set a variable
+- use `if` statements
+- write a method that takes parameters and returns a value
+- read code that uses classes and objects
+
+[Java Basics](getting-started/java-basics) is a quick tour of that, enough to recognize what you are looking at in the robot code.
+
+**If that list is unfamiliar, learn the language first.** Two free options:
+
+| Resource | Why |
+|----------|-----|
+| [CodeHS AP Computer Science A](https://codehs.com/info/curriculum/apjava) | Our first choice. Runs entirely in the browser with nothing to install, and autogrades as you go. The first few units are all you need to begin. |
+| [Helsinki Java MOOC](https://java-programming.mooc.fi/) | A thorough, well-regarded free course if you would rather go deeper. |
+
+You do not have to finish either one before starting. The early challenges need very little Java -- read a joystick value, call a method -- so most people work through the language material **alongside** the first few challenges. The one thing to have solid before the [Auto-stopping Collector](challenges/auto-stopping-collector) challenge is **classes and objects**, since that is where you start writing a class of your own.
+
+Already comfortable with Java? Skim [Java Basics](getting-started/java-basics) for the conventions we use, skip the [Java track](#java-track), and go straight to the challenges.
 
 ## Setup
 
@@ -35,7 +52,7 @@ Background you will be pointed at from the challenges, and can come back to any 
 
 ## Java track
 
-[Java Basics](getting-started/java-basics) is deliberately short -- just enough to start driving a robot. These two pages go further, and you can work through them alongside the challenges rather than before them.
+[Java Basics](getting-started/java-basics) is deliberately short -- just enough to start driving a robot. These two pages go further on the language itself, and pair well with [CodeHS](https://codehs.com/info/curriculum/apjava) if you are learning Java from scratch. Work through them alongside the challenges rather than before them.
 
 | Page | What It Covers |
 |------|----------------|
