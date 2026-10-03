@@ -3,7 +3,7 @@
 Welcome to Team 488 XBOT's programming discipline! This document will guide you through setting up the accounts and software you'll need to complete the XbotEdu curriculum.
 
 > [!NOTE]
-> This document describes only the tools you'll need to complete the XbotEdu curriculum. **If you are a programming student during competition season, you'll need to set up a few additional accounts and tools.** Please see the [in-season Programming Onboarding](https://github.com/Team488/XbotEdu/wiki/Programming-Onboarding) for more instructions.
+> This document describes only the tools you'll need to complete the XbotEdu curriculum. **If you are a programming student during competition season, you'll need to set up a few additional accounts and tools.** Please see the [in-season Programming Onboarding](/curriculum/getting-started/in-season-onboarding) for more instructions.
 
 > [!IMPORTANT]
 > **Please don't skip any steps** during this onboarding process. Doing so always results in pain down the road as we try to figure out which steps you did or didn't do!
@@ -88,4 +88,4 @@ Now you should have everything set up to complete the XbotEdu curriculum. Enjoy!
 Head back to [Setting up your environment](/curriculum/getting-started/environment-setup) to fork the code and open it in IntelliJ.
 
 > [!WARNING]
-> Remember, **if you are a programming student during competition season, you'll need to set up a few additional accounts and tools.** Please see the [in-season Programming Onboarding](https://github.com/Team488/XbotEdu/wiki/Programming-Onboarding) for more instructions.
+> Remember, **if you are a programming student during competition season, you'll need to set up a few additional accounts and tools.** Please see the [in-season Programming Onboarding](/curriculum/getting-started/in-season-onboarding) for more instructions.

@@ -16,6 +16,8 @@ Get your accounts, tools, and a copy of the code before writing anything.
 | [Environment Setup](getting-started/environment-setup) | Fork the practice project and open it in IntelliJ |
 | [Java Basics](getting-started/java-basics) | The minimum Java you need to get started |
 
+Programming on the competition robot during the season? [In-Season Onboarding](getting-started/in-season-onboarding) covers the extra hardware tools you will need.
+
 ## Reference
 
 Background you will be pointed at from the challenges, and can come back to any time.

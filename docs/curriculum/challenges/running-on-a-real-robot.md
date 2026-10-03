@@ -8,7 +8,7 @@ Handy addresses for later in this page:
 - Wifi IP = 10.4.88.2
 - USB IP = 172.22.11.2
 
-If you only did the minimal computer setup at the start of the curriculum, you may need to install the FRC Game Tools from [Full Programming Onboarding](https://github.com/Team488/XbotEdu/wiki/Programming-Onboarding). Check if you have **FRC Driver Station** installed - if you don't have it, you will need to install the FRC Game Tools.
+If you only did the minimal computer setup at the start of the curriculum, you may need to install the FRC Game Tools from [Full Programming Onboarding](/curriculum/getting-started/in-season-onboarding). Check if you have **FRC Driver Station** installed - if you don't have it, you will need to install the FRC Game Tools.
 
 ## The Robox
 The Robox is a "robot-in-a-box" that we built a few years ago and have been using for all sorts of testing ever since.
