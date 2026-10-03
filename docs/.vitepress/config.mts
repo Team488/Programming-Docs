@@ -54,6 +54,13 @@ export default defineConfig({
           ],
         },
         {
+          text: 'Java Track (optional depth)',
+          items: [
+            { text: 'Object-Oriented Programming', link: '/curriculum/getting-started/oop-concepts' },
+            { text: 'Intermediate Java', link: '/curriculum/getting-started/intermediate-java' },
+          ],
+        },
+        {
           text: 'Challenges',
           items: [
             { text: 'Basic Robot Principles', link: '/curriculum/challenges/basic-robot-principles' },
