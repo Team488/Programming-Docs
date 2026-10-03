@@ -1,151 +1,87 @@
 # Robot Architecture
 
-How a robot program is organized and how it runs.
+Team 488 programs its robots using a model known as the "Command" pattern. 
 
-## How the Robot Runs
+It roughly works like this:
+- A **Robot** is made out of [Subsystems](#subsystems).
+  - **Subsystems** have areas of responsibility. A robot might have a DriveSubsystem, an ArmSubsystem, a VisionSubsystem...
+  - Basically, every "thing" on the robot is contained by one **Subsystem.**
+- [Commands](#commands) use **Subsystems**. One **Subsystem** will have many **Commands** that use it.
+  - RaiseArmCommand, LowerArmCommand, and StopArmCommand would all use the **ArmSubsystem**.
+  - **Commands** can use more than one **Subsystem**. You could have a RaiseArmAndDriveForwardCommand.
+  - **Commands** are often triggered by humans pushing joystick/gamepad buttons.
+- The **Scheduler** runs Commands on the robot, and handles conflicts. It decides what happens when somebody tries to run RaiseArmCommand and LowerArmCommand at the same time.
 
-When you turn on the robot, here is what happens:
 
-```mermaid
-graph LR
-    A[Power On] --> B[Code starts]
-    B --> C[robotInit - setup once]
-    C --> D[autonomousInit]
-    D --> E[autonomousPeriodic 50x/sec]
-    E --> F[teleopInit]
-    F --> G[teleopPeriodic 50x/sec]
-    G --> H[disabled]
-    H --> D
-```
+WPILib also has a great page that explains the Command pattern: [What is "command-based" programming?](https://docs.wpilib.org/en/stable/docs/software/commandbased/what-is-command-based.html)
 
-### The Robot Lifecycle
+## More Details
 
-| Method | When It Runs | What To Put Here |
-|--------|-------------|-----------------|
-| `robotInit()` | Once when robot turns on | Create subsystems, load settings |
-| `autonomousInit()` | Once when auto starts | Set targets for auto routine |
-| `autonomousPeriodic()` | 50x/sec during auto | Check sensors, run autonomous logic |
-| `teleopInit()` | Once when teleop starts | Prepare for driver control |
-| `teleopPeriodic()` | 50x/sec during teleop | Read joysticks, drive the robot |
+### Subsystems
+Subsystems are responsible for all of the direct communication with physical devices on the robot (things like motors, sensors etc..). They provide a single place for Commands that need to use these things to do so in a clean, abstract manner.
 
-**Init vs Periodic:** Init runs once (like pressing "start" on a microwave). Periodic runs 50 times per second (like the microwave constantly checking if your food is done).
+#### Motivation
+For example, imagine a robot that has 2 motors on it (1 per side). All code that needs to move the robot needs to communicate with these 2 motors (this could be a lot of places in the code).  Over time the robot might change and now there are 4 motors instead of 2, all of the places that were talking to the motors need to be updated to account for this change. In order to avoid having to do this bulk updating of code, we use a Subsystem to wrap the motors (however many there are) and just expose out methods that aren't likely to change for others to use.
 
-## Project Structure
+### Commands
 
-How the XBot codebase is organized:
+This diagram helps show the lifecycle that a Command goes through: [Commands](https://github.com/Team488/SeriouslyCommonLib/wiki/Commands)
 
-```
-TeamXbot2026/
-├── src/
-│   └── main/java/competition/
-│       ├── electrical_contract/    # Wiring definitions (which motor on which port)
-│       ├── subsystems/             # Robot mechanisms (drive, shooter, intake)
-│       │   ├── drive/
-│       │   ├── shooter/
-│       │   └── intake/
-│       ├── operator_interface/     # Gamepad button bindings
-│       └── Robot.java              # Main robot class (lifecycle)
-```
+#### Starting commands
+On the real robot, commands are often started by a human pushing a joystick button. For example the operator might push a button to run the intake to suck balls into the robot. They can also be manually started by calling `.schedule()` on the command (which you will see in the tests sometimes).
 
-<details>
-<summary><strong>What is a Subsystem?</strong></summary>
+#### Requires
+Requires is the way to ensure that only 1 command is telling motors/mechanisms what to do at any given time. For example if you had a command called DriveForward and another one called StopDrive you wouldn't want them both running at the same time or they would fight over the motors and bad things would happen.
 
-A **subsystem** represents one physical part of the robot. Think of it like an organ in a body -- each organ has a specific job:
+A Command can "require" one or more subsystems. What this means in practice is that when this command starts running if there were any commands already running that also required any of these subsystems, those existing commands will be cancelled.
 
-- **DriveSubsystem** = legs (moves the robot)
-- **ShooterSubsystem** = arm (shoots game pieces)
-- **IntakeSubsystem** = hand (picks up game pieces)
+#### Default commands
+A Subsystem can optionally have 1 default command specified. This command will be run whenever no other commands that require the subsystem are running. This can be really useful for providing a safe default behavior (for instance for an arm that can move perhaps by default you want to stop its motors so it doesn't hurt itself). Another common use is for a subsystem that will really only have 1 command that ever runs on it and it should be running all the time.
 
-Each subsystem controls its own motors and sensors, and provides methods for other code to use.
+Default Commands for Subsystems are specified in the `SubsystemDefaultCommandMap` class. A default Command must require the Subsystem it is the default for.
 
-</details>
+#### Operator Command Map
 
-## The Entry Point
+Default commands handle what a Subsystem does when nothing else is happening. The other way Commands get started is a human pressing a button, and those bindings all live in one place: the `OperatorCommandMap` class.
+
+A binding looks like this - ask for the command you want in the method's parameters, then attach it to a button:
 
 ```java
-// Main.java -- the first code that runs when the robot turns on
-public final class Main {
-    public static void main(String... args) {
-        RobotBase.startRobot(Robot::new);
-    }
-}
+operatorInterface.gamepad.getifAvailable(XboxButton.A).whileTrue(togglePrecisionDriveCommand);
 ```
 
-You should never need to modify this file. It is the same for every FRC robot.
+Keeping every binding in one class means you can answer "what does the A button do?" by reading a single file, instead of hunting through every Command.
 
-## The Robot Class
+See [Mapping Buttons to Commands](/curriculum/robot-fundamentals/operator-command-map) for more detail, including what to do when you need the same Command bound to several buttons.
+
+### Virtual Subsystems
+
+A Subsystem usually represents real hardware, but it is doing two jobs at once: it owns the devices, **and** it acts as a lock. Whenever a Command requires a Subsystem, the Scheduler guarantees that no other Command requiring that same Subsystem runs at the same time.
+
+Sometimes we want that locking behavior without attaching it to hardware. For that we create a Subsystem that owns nothing at all - a "virtual subsystem" - and have Commands require it instead.
+
+The clearest example is the setpoint + maintainer pattern in SeriouslyCommonLib's `BaseSetpointSubsystem`. It creates an empty Subsystem to use purely as a lock:
 
 ```java
-public class Robot extends BaseRobot {
-    @Override
-    protected void initializeSystems() {
-        super.initializeSystems();
-        // Connect buttons to commands, set default behaviors
-        getInjectorComponent().subsystemDefaultCommandMap();
-        getInjectorComponent().operatorCommandMap();
+    private final Subsystem setpointLock;
+
+    public BaseSetpointSubsystem() {
+        setpointLock = new Subsystem() {};
     }
-}
 ```
 
-This is where everything gets connected together. You will learn more about this as you progress through the curriculum.
+Two different kinds of Command then require two different things:
 
-## Core Programming vs Vision
+- `BaseMaintainerCommand` requires the **real** subsystem. It typically runs as that subsystem's default command, continuously driving the motors toward whatever the current goal is.
+- `BaseSetpointCommand` requires the **lock** (`getSetpointLock()`), not the real subsystem.
 
-| Team | What They Work On |
-|------|------------------|
-| **Core Programming** | Drive, shooter, intake, autonomous, robot infrastructure |
-| **Vision** (future) | AprilTag detection, camera processing, path planning |
+Why bother? If a command that just sets a new goal required the real subsystem, starting it would cancel the maintainer - the very thing doing the work of getting there. Requiring the lock instead keeps goal-setting commands mutually exclusive with each other, while leaving the maintainer running undisturbed.
 
-You will start on **Core Programming**. Vision is a separate team you can join later.
+The lock behaves like any other Subsystem, so it can have its own default command:
 
----
+```java
+shooter.getSetpointLock().setDefaultCommand(stopCommand);
+```
 
-## Quiz
-
-**Q1:** How many times per second does `teleopPeriodic()` run?
-
-- [ ] A) Once
-- [ ] B) 5 times per second
-- [ ] C) 50 times per second
-- [ ] D) 500 times per second
-
-<details>
-<summary>Answer</summary>
-
-**C) 50 times per second**
-
-The robot control loop runs at 50Hz, meaning `periodic()` methods are called every 20 milliseconds. This is fast enough to feel responsive to the driver.
-
-</details>
-
-**Q2:** What does `robotInit()` do?
-
-- [ ] A) Runs 50 times per second
-- [ ] B) Runs once when the robot turns on
-- [ ] C) Runs when a button is pressed
-- [ ] D) Runs when the match ends
-
-<details>
-<summary>Answer</summary>
-
-**B) Runs once when the robot turns on**
-
-`robotInit()` runs exactly once at startup to set up subsystems, load settings, and prepare the robot.
-
-</details>
-
-**Q3:** What does a subsystem represent?
-
-- [ ] A) A file in the project
-- [ ] B) One physical mechanism on the robot
-- [ ] C) A gamepad button
-- [ ] D) A type of motor
-
-<details>
-<summary>Answer</summary>
-
-**B) One physical mechanism on the robot**
-
-Each subsystem controls one part of the robot (drive, shooter, intake, etc.) with its own motors and sensors.
-
-</details>
+## How tos
+- [Mapping Buttons to Commands](/curriculum/robot-fundamentals/operator-command-map) - hooking Commands up to gamepad buttons

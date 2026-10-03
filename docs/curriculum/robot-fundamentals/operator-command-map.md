@@ -1,303 +1,84 @@
-# Operator Command Map
+# Mapping Buttons to Commands
 
-How buttons on the gamepad are connected to robot actions.
+## Basic
+If you want a robot to do something when you press a button on a gamepad or joystick, you'll need to learn about the OperatorCommandMap.
 
-## The Problem
-
-You have subsystems that can do things (drive, shoot, climb) and commands that control them. But how does pressing the A button on a gamepad actually make the robot shoot?
-
-The **OperatorCommandMap** is the bridge. It connects every button, trigger, and D-pad direction to a specific command.
-
-```
-Driver presses A  →  OperatorCommandMap  →  ShooterFireCommand runs
-```
-
-## How XBot Organizes Button Bindings
-
-XBot uses three separate classes to wire everything up:
-
-| Class | What It Does |
-|-------|-------------|
-| **OperatorInterface** | Creates the gamepad objects (driver, operator, debug) |
-| **OperatorCommandMap** | Binds buttons to commands |
-| **SubsystemDefaultCommandMap** | Sets default commands for each subsystem |
-
-## OperatorInterface: The Gamepad Provider
-
-The `OperatorInterface` creates and exposes the gamepads. It is a `@Singleton` because there is only one set of physical controllers.
-
-```java
-@Singleton
-public class OperatorInterface {
-    public XXboxController driverGamepad;    // Port 0 - driver
-    public XXboxController operatorGamepad;   // Port 1 - operator
-    public XXboxController setupDebugGamepad; // Port 2 - debug/testing
-
-    @Inject
-    public OperatorInterface(
-            XXboxControllerFactory controllerFactory,
-            PropertyFactory pf) {
-
-        // Create gamepad on USB port 0
-        driverGamepad = controllerFactory.create(0);
-        driverGamepad.setLeftInversion(false, true);   // Invert Y-axis
-        driverGamepad.setRightInversion(true, true);
-
-        operatorGamepad = controllerFactory.create(1);
-        setupDebugGamepad = controllerFactory.create(2);
-
-        // Tunable deadband (how far you must push the stick before it responds)
-        pf.setPrefix("OperatorInterface");
-        driverDeadband = pf.createPersistentProperty("Driver Deadband", 0.12);
-    }
-}
-```
-
-<details>
-<summary><strong>What is a deadband?</strong></summary>
-
-A **deadband** is a small zone near the center of a joystick where input is ignored. Joysticks do not always return exactly to 0 when released -- they might read 0.05 or 0.08. The deadband ignores tiny values so the robot does not drift when you let go of the stick.
-
-```
-Joystick position:  -1.0  [=======DEADBAND=======]  1.0
-                            ↑                  ↑
-                        -0.12               0.12
-                    (anything here = 0)
-```
-
-</details>
-
-## OperatorCommandMap: Binding Buttons to Commands
-
-This is where you wire every button on the gamepad to a command. XBot uses a pattern where each group of related bindings has its own setup method.
+In any project based on the Robot Template, a file called OperatorCommandMap.java already exists. This is where you will be creating the mapping. In a new project, it may look like the following:
 
 ```java
 @Singleton
 public class OperatorCommandMap {
-
+    
+    // Example for setting up a command to fire when a button is pressed:
     @Inject
-    public OperatorCommandMap() {}  // Dagger creates the singleton
-
-    // Driver controls -- movement, aiming, resetting
-    @Inject
-    public void setupDriveCommands(
-            OperatorInterface oi,
-            SetRobotHeadingCommand resetHeading,
-            PrecisionModeCommand precisionMode,
-            RotateToHubCommand rotateToHub) {
-
-        // Start button -> reset robot heading to 0
-        oi.driverGamepad.getifAvailable(XXboxController.XboxButton.Start)
-            .onTrue(resetHeading);
-
-        // Hold Y -> precision mode (slower, finer control)
-        oi.driverGamepad.getifAvailable(XXboxController.XboxButton.Y)
-            .whileTrue(precisionMode);
-
-        // Hold A -> rotate toward the hub
-        oi.driverGamepad.getifAvailable(XXboxController.XboxButton.A)
-            .whileTrue(rotateToHub);
-
-        // D-Pad up -> drive to alliance trench position
-        oi.driverGamepad.getPovIfAvailable(0)
-            .onTrue(driveThroughTrenchCommand);
+    public void setupMyCommands(
+            OperatorInterface operatorInterface,
+            SetRobotHeadingCommand resetHeading)
+    {
+        resetHeading.setHeadingToApply(90);
+        operatorInterface.gamepad.getifAvailable(XboxButton.Start).onTrue(resetHeading);
     }
 
-    // Operator controls -- shooter, intake, climber
-    @Inject
-    public void setupOperatorCommands(
-            OperatorInterface oi,
-            ShooterFireCommand shoot,
-            IntakeDeployCommand deployIntake,
-            ClimberExtendCommand climb) {
-
-        oi.operatorGamepad.getifAvailable(XXboxController.XboxButton.RightBumper)
-            .onTrue(shoot);
-
-        oi.operatorGamepad.getifAvailable(XXboxController.XboxButton.A)
-            .whileTrue(deployIntake);
-    }
 }
 ```
 
-### Available Binding Methods
+Let's break down what each important piece does.
+- The function name: setupMyCommands(). Typically, we have one method for each major robot component. For example, you can see how [in the 2019 code](https://github.com/Team488/TeamXbot2019/blob/master/Competition/src/main/java/competition/operator_interface/OperatorCommandMap.java), we have methods like setupDriveCommands, setupGripperCommands, and setupElevatorCommands.
+- The arguments: operatorInterface and resetHeading. You will always need the operator interface, and you need to include the commmand or commands you want to hook up to buttons.
 
-WPILib provides these ways to trigger a command from a button:
+In the body of the method, we do a few things:
+1. Configure our commands as needed. The SetRobotHeadingCommand needs a heading to apply, so we set that first.
+1. In the operator interface, we get the device the human is going to use. In this case, it is a gamepad.
+1. On the gamepad, we "Get if available" the Start button. (This does some sanity checks to make sure you're not trying to use a button that somebody else already used in the code.) For a gamepad, use the `XboxButton` values rather than raw button numbers.
+1. With the button, we set it to run our resetHeading command whenever the button is pressed, using `onTrue`. The useful options are:
+  - `onTrue` - start the command once, when the button is pressed. Good for commands that do one thing and finish.
+  - `whileTrue` - run the command while the button is held, and cancel it on release. Good for "do this as long as I hold the button" behavior.
+  - `toggleOnTrue` - start the command on the first press, cancel it on the next press.
 
-| Method | Behavior | When To Use |
-|--------|----------|-------------|
-| `onTrue(command)` | Runs command once when button pressed | Reset heading, toggle modes |
-| `onFalse(command)` | Runs command once when button released | Cleanup when letting go |
-| `whileTrue(command)` | Runs while button held, cancels on release | Driving, shooting, intake |
-| `toggleOnTrue(command)` | Toggles on/off each press | Keep something running hands-free |
+## Advanced
+### Provider<> and using the same command over and over
+You can run into a case where you need to use the same command multiple times. Perhaps you made a command called TurnToAnyAngleCommand, which needs to be given a goal angle, and you want to turn to 4 different directions. You could either do:
 
-<details>
-<summary><strong>What does getifAvailable do?</strong></summary>
-
-`getifAvailable` is an XBot-specific safety feature. Each button can only be bound **once**. If you try to bind the same button twice, it throws an error at startup.
-
-This prevents bugs like:
 ```java
-// BUG: Both commands try to use the same button
-oi.driverGamepad.getifAvailable(XboxButton.A).onTrue(shootCommand);
-oi.driverGamepad.getifAvailable(XboxButton.A).onTrue(intakeCommand);
-// ERROR! Button A was already claimed by shootCommand
+    @Inject
+    public void setupTurningCommands(
+        OperatorInterface operatorInterface,
+        TurnToAnyAngleCommand turnUp,
+        TurnToAnyAngleCommand turnLeft,
+        TurnToAnyAngleCommand turnRight,
+        TurnToAnyAngleCommand turnDown,
+    ) {
+        turnUp.setGoal(90);
+        turnLeft.setGoal(180);
+        turnRight.setGoal(0);
+        turnDown.setGoal(270);
+
+        operatorInterface.gamepad.getifAvailable(XboxButton.Y).onTrue(turnUp);
+        operatorInterface.gamepad.getifAvailable(XboxButton.X).onTrue(turnLeft);
+        operatorInterface.gamepad.getifAvailable(XboxButton.B).onTrue(turnRight);
+        operatorInterface.gamepad.getifAvailable(XboxButton.A).onTrue(turnDown);
+    }
 ```
 
-For D-Pad directions, use `getPovIfAvailable(angle)` where angle is 0 (up), 90 (right), 180 (down), or 270 (left).
-
-</details>
-
-### Chaining Bindings
-
-A single button can do different things on press and release:
+Or you could use the Provider<> as follows to create the commands "on-demand":
 
 ```java
-// Hold Y to aim, release to clear the target
-oi.driverGamepad.getifAvailable(XXboxController.XboxButton.Y)
-    .whileTrue(aimAtTargetCommand)     // Starts when Y is pressed
-    .onFalse(clearTargetCommand);      // Runs when Y is released
-```
-
-## SubsystemDefaultCommandMap: Default Behaviors
-
-Every subsystem needs a "resting behavior" -- what it does when no command is actively using it. This is set up in the `SubsystemDefaultCommandMap`.
-
-```java
-@Singleton
-public class SubsystemDefaultCommandMap {
-
     @Inject
-    public SubsystemDefaultCommandMap() {}
-
-    @Inject
-    public void setupDriveSubsystem(
-            DriveSubsystem drive,
-            SwerveDriveWithJoysticksCommand driveCommand) {
-        // When no button is pressed, drive with joysticks
-        drive.setDefaultCommand(driveCommand);
+    public void setupTurningCommands(
+        OperatorInterface operatorInterface,
+        Provider<TurnToAnyAngleCommand> turnProvider
+    ) {
+        operatorInterface.gamepad.getifAvailable(XboxButton.Y).onTrue(makeTurnCommand(turnProvider, 90));
+        operatorInterface.gamepad.getifAvailable(XboxButton.X).onTrue(makeTurnCommand(turnProvider, 180));
+        operatorInterface.gamepad.getifAvailable(XboxButton.B).onTrue(makeTurnCommand(turnProvider, 0));
+        operatorInterface.gamepad.getifAvailable(XboxButton.A).onTrue(makeTurnCommand(turnProvider, 270));
     }
 
-    @Inject
-    public void setupShooterSubsystem(
-            ShooterSubsystem shooter,
-            ShooterWheelMaintainerCommand maintainer) {
-        // Keep shooter at idle speed when not firing
-        shooter.setDefaultCommand(maintainer);
+    private TurnToAnyAngleCommand makeTurnCommand(Provider<TurnToAnyAngleCommand> provider, double goal) {
+        TurnToAnyAngleCommand command = provider.get();
+        command.setGoal(goal);
+        return command;
     }
-
-    @Inject
-    public void setupHopperRoller(
-            HopperRollerSubsystem hopper) {
-        // Stop when not actively running
-        hopper.setDefaultCommand(hopper.getStopCommand());
-    }
-}
 ```
 
-Default commands are typically:
-- **MaintainerCommands** -- keep a mechanism at its target (PID idle)
-- **Joystick drive commands** -- let the driver control when no other command claims drive
-- **Stop commands** -- safely stop moving
-
-## How It All Connects
-
-Everything is wired together in `Robot.initializeSystems()`:
-
-```java
-@Override
-protected void initializeSystems() {
-    super.initializeSystems();
-
-    // 1. Set up default commands for every subsystem
-    getInjectorComponent().subsystemDefaultCommandMap();
-
-    // 2. Bind buttons to commands
-    getInjectorComponent().operatorCommandMap();
-}
-```
-
-Dagger automatically calls the `@Inject` methods in both maps when they are accessed. Simply calling `getInjectorComponent().operatorCommandMap()` triggers all the button bindings.
-
-### Complete Flow
-
-```
-Robot starts
-  ↓
-Robot.initializeSystems()
-  ↓
-subsystemDefaultCommandMap()    → Every subsystem gets a default command
-  ↓
-operatorCommandMap()            → Every button gets bound to a command
-  ↓
-Driver presses A button
-  ↓
-XXboxController detects button press
-  ↓
-OperatorCommandMap says: "A → ShooterFireCommand"
-  ↓
-ShooterFireCommand.initialize() → Sets shooter to 5000 RPM
-  ↓
-Command runs until isFinished() returns true
-```
-
----
-
-## Source Code
-
-- [TeamXbot2026 OperatorCommandMap](https://github.com/Team488/TeamXbot2026/blob/main/src/main/java/competition/operator_interface/OperatorCommandMap.java)
-- [TeamXbot2026 OperatorInterface](https://github.com/Team488/TeamXbot2026/blob/main/src/main/java/competition/operator_interface/OperatorInterface.java)
-- [TeamXbot2026 SubsystemDefaultCommandMap](https://github.com/Team488/TeamXbot2026/blob/main/src/main/java/competition/subsystems/SubsystemDefaultCommandMap.java)
-- [XbotEdu OperatorCommandMap](https://github.com/Team488/XbotEdu/blob/main/src/main/java/competition/operator_interface/OperatorCommandMap.java)
-
----
-
-## Quiz
-
-**Q1:** What does `getifAvailable()` do?
-
-- [ ] A) Checks if a gamepad is connected
-- [ ] B) Claims a button and throws an error if it is already claimed
-- [ ] C) Returns the battery level of the gamepad
-- [ ] D) Makes the gamepad vibrate
-
-<details>
-<summary>Answer</summary>
-
-**B) Claims a button and throws an error if it is already claimed**
-
-`getifAvailable` is XBot's safety mechanism that prevents two commands from binding to the same button. Each button can only be claimed once -- duplicates cause a startup error.
-
-</details>
-
-**Q2:** What is the difference between `onTrue(command)` and `whileTrue(command)`?
-
-- [ ] A) There is no difference
-- [ ] B) `onTrue` runs once when pressed, `whileTrue` runs as long as the button is held
-- [ ] C) `onTrue` is for the operator, `whileTrue` is for the driver
-- [ ] D) `onTrue` runs in autonomous mode only
-
-<details>
-<summary>Answer</summary>
-
-**B) `onTrue` runs once when pressed, `whileTrue` runs as long as the button is held**
-
-`onTrue` schedules the command once when the button transitions from released to pressed. `whileTrue` schedules the command when pressed and cancels it when released -- the command runs continuously while held.
-
-</details>
-
-**Q3:** Where are default commands set up?
-
-- [ ] A) In the OperatorCommandMap
-- [ ] B) In the SubsystemDefaultCommandMap
-- [ ] C) In each subsystem's constructor
-- [ ] D) In the ElectricalContract
-
-<details>
-<summary>Answer</summary>
-
-**B) In the SubsystemDefaultCommandMap**
-
-The `SubsystemDefaultCommandMap` is a separate class with `@Inject` methods that call `subsystem.setDefaultCommand(command)` for each subsystem. It is called during `Robot.initializeSystems()` to give every subsystem a resting behavior.
-
-</details>
+Each call to `provider.get()` hands you a brand new command instance. That matters: a single Command instance can't be bound to several buttons or added to more than one CommandGroup, so when you need "the same" command in several places, a Provider is how you get separate copies of it.

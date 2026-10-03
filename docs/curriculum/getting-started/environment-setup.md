@@ -1,291 +1,72 @@
 # Environment Setup
 
-Get your computer ready for FRC programming. No experience needed.
+## Getting started
 
-## What You Will Install
+In this first challenge you'll get your own copy of the XbotEdu code, download it to your computer, and open it in IntelliJ so you're ready to start writing robot code.
 
-| Software | What It Does |
-|----------|-------------|
-| **Java 17** | The language your robot code is written in |
-| **VSCode + WPILib** | The editor where you write code |
-| **Git & GitHub Desktop** | Tracks changes to your code and shares it with the team |
+### Onboarding
 
-## Install Java 17
+If you just want to do the curriculum, follow the instructions in [Edu Onboarding](/curriculum/getting-started/onboarding).
 
-Java is the programming language you will use to control the robot. Think of it like a translator between your brain and the robot -- you write instructions in Java, and the computer turns them into commands the robot understands.
+Or if you need to set up for in-season robot programming, follow the instructions in [Full Programming Onboarding](https://github.com/Team488/XbotEdu/wiki/Programming-Onboarding) instead. It covers everything in Edu Onboarding plus a few extra tools.
 
-### Windows / macOS
-1. Go to [Adoptium](https://adoptium.net/)
-2. Download **Java 17 (LTS)** for your operating system
-3. Run the installer and follow the prompts
+**Important:** Don't continue until onboarding is complete. Missing tools cause confusing errors in the steps below.
 
-### Linux
-```bash
-# Ubuntu/Debian
-sudo apt install openjdk-17-jdk
+### Fork the XbotEdu repository
+A 'fork' is a personal copy of a code repository on GitHub. Forking a repository allows you to freely experiment with changes without affecting the original project. [More background on forking](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo).
 
-# Verify it worked
-java -version
-# Should show: openjdk version "17.x.x"
-```
+1. In the browser, make sure you're signed in to GitHub, then navigate to [Team488/XbotEdu](https://github.com/Team488/XbotEdu)
+1. Click the **Fork** button in the upper right corner. (If a banner is covering it, close the banner first.)
+1. On the "Create a new fork" page, make sure **Owner** is set to your own GitHub account, then click **Create fork**.
 
-<details>
-<summary><strong>What is Java and why Java 17 specifically?</strong></summary>
+When it finishes, you'll be looking at `github.com/<your-username>/XbotEdu`, which is your fork.
 
-Java is one of the most popular programming languages in the world. It is used for everything from Android apps to bank systems to robot code. FRC uses Java because it runs on the roboRIO (the robot's computer) and WPILib (the FRC library) is written for it.
+### Sync the repository locally
 
-**Why version 17?** WPILib is built specifically for Java 17, which is a Long Term Support (LTS) release. This means it will receive updates for many years. Newer versions of Java exist, but WPILib has not been updated to use them yet. Older versions are missing features WPILib needs.
+"Cloning" downloads a copy of a repository from GitHub onto your computer so you can work on it.
 
-**If you already have a different Java version:** You can install Java 17 alongside it. Your robot project will use Java 17 even if your computer has other versions installed.
+1. Follow [Use GitHub Desktop to clone](/curriculum/getting-started/clone-with-github-desktop) to clone **your fork** (`<your-username>/XbotEdu`, not `Team488/XbotEdu`).
+1. If GitHub Desktop asks **"How are you planning to use this fork?"**, choose **For my own purposes**. Later in the curriculum you'll open pull requests against your own fork.
 
-</details>
+**Warning: don't clone inside of a OneDrive folder.** OneDrive tries to sync the thousands of files the build creates, which causes slow builds and strange file-locking errors. On many Windows computers the `Documents` folder is inside OneDrive, so check the **Local path** in the clone dialog. If it contains `OneDrive`, change it to something like `C:\Users\<you>\GitHub`.
 
-## Install VSCode + WPILib
+### Open the Edu projects in IntelliJ
 
-VSCode is the editor where you will write all your robot code. WPILib is the FRC toolkit that adds all the robot-specific features to VSCode.
+1. Open the application **IntelliJ IDEA** (it may be listed as "IntelliJ IDEA Community Edition"), which you installed during the onboarding steps.
+1. Click **Open** from the **Projects** tab.
+1. Navigate to the XbotEdu folder you just cloned and open it.
+1. If prompted, open the project as a **Gradle** project, not an Eclipse project.
+1. If prompted, **Trust** the project.
+1. The project will automatically start building. You can watch its progress in the status bar at the bottom of the window.
 
-### Download WPILib
-1. Go to [WPILib GitHub Releases](https://github.com/wpilibsuite/allwpilib/releases)
-2. Download the installer for your OS
+IntelliJ requires some additional configuration after you load a project for the first time. You need to tell it to use the Java version (JDK) that came with WPILib.
 
-### Windows
-1. Run the `.exe` installer
-2. Select **"Install VSCode + WPILib"**
-3. Follow the prompts
+Open the main menu and choose **Project Structure...**
 
-### macOS
-1. Open the `.dmg` file
-2. Drag VSCode to Applications
-3. If blocked: go to **System Settings > Privacy & Security** and click **"Open Anyway"**
+<img width="416" alt="Main menu" src="https://github.com/user-attachments/assets/a324e688-b384-40e1-b46a-9555e84e421e" />
 
-### Linux
-1. Extract the `.zip` installer
-2. Run: `sudo ./Install-WPILib.sh`
+<img width="717" alt="Project settings menu item" src="https://github.com/user-attachments/assets/782ef074-b50c-49e1-8411-b194f76f5d70" />
 
-<details>
-<summary><strong>What is WPILib?</strong></summary>
+On the **Project** tab, set **SDK** to "temurin-17". If it's not present, you may need to select "Add JDK from disk..." and find the JDK that you installed with WPILib, which is located at `C:\Users\Public\wpilib\<year>\jdk` (for example, `C:\Users\Public\wpilib\2026\jdk`).
 
-WPILib (WPI Library) is the official FRC software library made by Worcester Polytechnic Institute. It provides all the building blocks for robot control: motor control, sensors, communication, and the command-based framework.
+<img width="1862" alt="Select SDK" src="https://github.com/user-attachments/assets/078485d5-28e2-4549-9a1d-fdeb771fa2da" />
 
-**Analogy:** If building a robot program were building a house, WPILib would be the pre-made doors, windows, and plumbing. You could make everything from scratch, but the basics are already provided.
+Go to the **SDKs** tab and select the same JDK (in this case, "temurin-17") and verify that the paths all start with `C:\Users\Public\wpilib\<year>\jdk`.
 
-**What WPILib gives you:**
-- Motor controller libraries (SparkMax, TalonFX)
-- Sensor libraries (gyros, encoders, cameras)
-- Command-based programming framework
-- Robot simulation (test without a real robot)
-- Dashboard tools (SmartDashboard, Shuffleboard)
+<img width="1842" alt="Verify correct SDK" src="https://github.com/user-attachments/assets/c3e24666-8a06-4e25-ac8c-1a5e050bc30b" />
 
-</details>
+Click **OK**.
 
-<details>
-<summary><strong>Why VSCode and not another editor?</strong></summary>
+Open the main menu again and choose **Settings...**
 
-WPILib only works with VSCode because the WPILib extension integrates deeply with it. You cannot use IntelliJ, Eclipse, or any other editor for FRC development.
+<img width="711" alt="Settings menu item" src="https://github.com/user-attachments/assets/37014dde-5c29-4ab0-b24e-3227b638017b" />
 
-**Why VSCode is good:**
-- Free on all operating systems
-- WPILib extension provides one-click build, deploy, and test
-- IntelliSense (autocomplete) for Java
-- Built-in terminal and Git support
-- Huge library of extensions
+Navigate to "Build, Execution, Deployment" -> "Build Tools" -> "Gradle" in the menu on the left. In the "Gradle JVM" field, select "Project SDK", and then click **OK**.
 
-</details>
+<img width="1982" alt="Gradle Project SDK" src="https://github.com/user-attachments/assets/8fa6ca6d-ab1b-4f8c-b197-845ea0da7614" />
 
-## Install Git & GitHub Desktop
+**Tip:** If IntelliJ shows build or Gradle errors after these steps, try reloading the project from the **Gradle** tool window (the elephant icon on the right side) using the **Reload All Gradle Projects** button. If errors persist, ask a mentor or teammate for help. That's what we're here for!
 
-Git tracks changes to your code (like a save button that remembers every version). GitHub Desktop gives you a visual way to use Git without typing commands.
+## Next Steps
 
-### Install Git
-- **Windows:** Download from [git-scm.com](https://git-scm.com/) and run the installer
-- **macOS:** Run `git --version` in Terminal (it will prompt you to install if needed)
-- **Linux:** `sudo apt install git`
-
-### Install GitHub Desktop
-1. Go to [desktop.github.com](https://desktop.github.com/)
-2. Download and install for your OS
-3. Sign in with your GitHub account (create one at github.com if you do not have one)
-
-<details>
-<summary><strong>What is the difference between Git and GitHub Desktop?</strong></summary>
-
-**Git** is the engine that tracks changes. It runs in the background on your computer.
-
-**GitHub Desktop** is a visual app that lets you use Git by clicking buttons instead of typing commands.
-
-**Think of it like driving a car:**
-- Git = the engine and transmission (does the actual work)
-- GitHub Desktop = the steering wheel and pedals (lets you control it easily)
-
-Both control the same thing -- GitHub Desktop just gives you buttons and menus instead of commands you have to memorize.
-
-</details>
-
-## Install OpenCode (AI Coding Assistant)
-
-OpenCode is an AI coding assistant that helps you write, understand, and debug robot code. It runs in your terminal.
-
-### Install OpenCode
-
-```bash
-curl -fsSL https://opencode.ai/install | bash
-```
-
-Or using a package manager:
-
-```bash
-# npm
-npm install -g opencode-ai
-
-# macOS (Homebrew)
-brew install anomalyco/tap/opencode
-
-# Arch Linux
-sudo pacman -S opencode
-
-# Windows (Chocolatey)
-choco install opencode
-```
-
-### Windows Users
-
-For the best experience, use [WSL (Windows Subsystem for Linux)](https://learn.microsoft.com/en-us/windows/wsl/install). OpenCode works best in a Unix-like environment.
-
-You will learn how to configure and use OpenCode in Module 12.
-
-## Verify Everything Works
-
-1. Open VSCode
-2. Press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (Mac) to open the Command Palette
-3. Type **"WPILib"** -- you should see WPILib commands appear
-
-## Clone XbotEdu (Your Practice Project)
-
-XbotEdu is a practice robot project with built-in tests. You can write and test robot code without owning a physical robot.
-
-### Using GitHub Desktop (recommended for beginners)
-1. Open GitHub Desktop
-2. Click **File > Clone Repository**
-3. Go to the **URL** tab
-4. Enter: `https://github.com/Team488/XbotEdu.git`
-5. Choose where to save it on your computer
-6. Click **Clone**
-
-### Using the command line (alternative)
-```bash
-git clone https://github.com/Team488/XbotEdu.git
-cd XbotEdu
-```
-
-## Build and Test
-
-Once you have the project open in VSCode:
-
-1. Open the terminal in VSCode: **Terminal > New Terminal**
-2. Build the project:
-   ```bash
-   # Windows
-   gradlew.bat build
-   
-   # macOS / Linux
-   ./gradlew build
-   ```
-3. Run the tests:
-   ```bash
-   # Windows
-   gradlew.bat test
-   
-   # macOS / Linux
-   ./gradlew test
-   ```
-
-You should see **BUILD SUCCESSFUL** in the output.
-
-<details>
-<summary><strong>What does "build" actually do?</strong></summary>
-
-Building is the process of turning your Java code into something the robot can run. When you run `./gradlew build`, this happens:
-
-1. **Download dependencies** -- Gradle downloads all the libraries your code needs
-2. **Compile** -- Your `.java` files are turned into `.class` files (bytecode)
-3. **Test** -- Any unit tests are run to check for bugs
-4. **Package** -- Everything is bundled into a deployable format
-
-**The first build is slowest** because it downloads dependencies. Subsequent builds are much faster.
-
-</details>
-
-## Troubleshooting
-
-| Problem | Solution |
-|---------|----------|
-| `./gradlew: Permission denied` | Run `chmod +x gradlew` (macOS/Linux) |
-| `Java version error` | Install Java 17 from [Adoptium](https://adoptium.net/) |
-| VSCode does not show WPILib | Reinstall the WPILib extension from the marketplace |
-| Build fails on first run | Wait for dependencies to download, then try again |
-| GitHub Desktop cannot find repo | Make sure you typed the URL exactly right |
-| "command not found" for git | Restart your terminal after installing Git |
-
-## Learning Java Resources
-
-You will learn Java in the next module, but here are excellent free resources to bookmark:
-
-| Resource | What It Teaches | Best For |
-|----------|----------------|----------|
-| [Codecademy Learn Java](https://www.codecademy.com/learn/learn-java) | Interactive coding exercises | Complete beginners |
-| [W3Schools Java Tutorial](https://www.w3schools.com/java/) | Quick reference with examples | Looking things up |
-| [freeCodeCamp Java Course](https://www.youtube.com/watch?v=A74TOX803D0) | 4-hour video course | Visual learners |
-| [Java for Complete Beginners](https://www.udemy.com/course/java-tutorial/) | Free Udemy course | Step-by-step learners |
-| [Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/) | Official Java documentation | Reference when you get stuck |
-
----
-
-## Quiz
-
-**Q1:** Why does FRC use Java 17 specifically?
-
-- [ ] A) It is the newest Java version
-- [ ] B) WPILib is built for Java 17
-- [ ] C) Java 17 is the only free version
-- [ ] D) FRC does not use Java at all
-
-<details>
-<summary>Answer</summary>
-
-**B) WPILib is built for Java 17**
-
-WPILib targets Java 17 because it is a Long Term Support (LTS) release. Newer versions exist but WPILib has not been updated to use them yet.
-
-</details>
-
-**Q2:** What is the difference between Git and GitHub Desktop?
-
-- [ ] A) They are the same thing
-- [ ] B) Git is the engine, GitHub Desktop is a visual app to control it
-- [ ] C) GitHub Desktop is only for Windows
-- [ ] D) Git only works with GitHub Desktop
-
-<details>
-<summary>Answer</summary>
-
-**B) Git is the engine, GitHub Desktop is a visual app to control it**
-
-Git runs in the background and handles version control. GitHub Desktop gives you a visual interface with buttons and menus so you do not need to memorize commands.
-
-</details>
-
-**Q3:** What command runs the tests in XbotEdu?
-
-- [ ] A) `./gradlew build`
-- [ ] B) `./gradlew test`
-- [ ] C) `./gradlew run`
-- [ ] D) `./gradlew compile`
-
-<details>
-<summary>Answer</summary>
-
-**B) `./gradlew test`**
-
-The `test` command runs all unit tests in the project. `build` compiles everything (and also runs tests), but `test` specifically focuses on running the tests.
-
-</details>
+Continue with the next lesson: [Java Basics](/curriculum/getting-started/java-basics)
