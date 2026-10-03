@@ -23,6 +23,7 @@ Background you will be pointed at from the challenges, and can come back to any 
 | Page | What It Covers |
 |------|----------------|
 | [Robot Architecture](robot-fundamentals/robot-architecture) | Subsystems, Commands, the Scheduler, and how they fit together |
+| [Robot Coordinate Conventions](robot-fundamentals/coordinate-conventions) | Which way is positive, for both the robot and the field |
 | [Mapping Buttons to Commands](robot-fundamentals/operator-command-map) | Binding commands to gamepad buttons |
 | [Git Introduction](getting-started/git-introduction) | What source control is, and the terms you will see |
 | [Clone with GitHub Desktop](getting-started/clone-with-github-desktop) | Getting a copy of a repository onto your computer |
@@ -56,6 +57,12 @@ Hands-on exercises in the [XbotEdu](https://github.com/Team488/XbotEdu) practice
 | [Upgrading Using the SeriouslyCommonLib](challenges/upgrading-using-seriouslycommonlib) | Replace your own control code with the team's library |
 | [Running on a Real Robot](challenges/running-on-a-real-robot) | Deploy your code to a RoboRIO |
 | [Auto-stopping Collector](challenges/auto-stopping-collector) | Build a subsystem and commands from scratch |
+
+Once those are done, there is one more, considerably harder:
+
+| Advanced | What You Will Build |
+|------|---------------------|
+| [Advanced Swerve Challenges](challenges/advanced-swerve-challenges) | Drive a swerve chassis: steer and drive each module independently |
 
 ## AI Tools
 

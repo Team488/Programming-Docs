@@ -75,12 +75,14 @@ export default defineConfig({
             { text: 'Upgrading Using the SeriouslyCommonLib', link: '/curriculum/challenges/upgrading-using-seriouslycommonlib' },
             { text: 'Running on a Real Robot', link: '/curriculum/challenges/running-on-a-real-robot' },
             { text: 'Auto-stopping Collector', link: '/curriculum/challenges/auto-stopping-collector' },
+            { text: 'Advanced Swerve Challenges', link: '/curriculum/challenges/advanced-swerve-challenges' },
           ],
         },
         {
           text: 'Reference',
           items: [
             { text: 'Robot Architecture', link: '/curriculum/robot-fundamentals/robot-architecture' },
+            { text: 'Robot Coordinate Conventions', link: '/curriculum/robot-fundamentals/coordinate-conventions' },
             { text: 'Mapping Buttons to Commands', link: '/curriculum/robot-fundamentals/operator-command-map' },
             { text: 'Git Introduction', link: '/curriculum/getting-started/git-introduction' },
             { text: 'Clone with GitHub Desktop', link: '/curriculum/getting-started/clone-with-github-desktop' },
@@ -112,6 +114,8 @@ export default defineConfig({
             { text: 'AdvantageScope', link: '/tooling/advantagescope' },
             { text: 'QDriverStation', link: '/tooling/qdriverstation' },
             { text: 'Elastic', link: '/tooling/elastic' },
+            { text: 'Debugging Swerve Drive', link: '/tooling/swerve-debugging' },
+            { text: 'Updating SeriouslyCommonLib', link: '/tooling/update-seriouslycommonlib' },
           ],
         },
       ],
