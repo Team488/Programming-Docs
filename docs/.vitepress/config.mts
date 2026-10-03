@@ -45,25 +45,12 @@ export default defineConfig({
     sidebar: {
       '/curriculum/': [
         {
-          text: 'Getting Started',
+          text: 'Setup',
           items: [
             { text: 'Overview', link: '/curriculum/' },
+            { text: 'Onboarding', link: '/curriculum/getting-started/onboarding' },
             { text: 'Environment Setup', link: '/curriculum/getting-started/environment-setup' },
             { text: 'Java Basics', link: '/curriculum/getting-started/java-basics' },
-            { text: 'Object-Oriented Programming', link: '/curriculum/getting-started/oop-concepts' },
-            { text: 'Intermediate Java', link: '/curriculum/getting-started/intermediate-java' },
-            { text: 'Git & GitHub Desktop', link: '/curriculum/getting-started/git-github' },
-          ],
-        },
-        {
-          text: 'Robot Fundamentals',
-          items: [
-            { text: 'Robot Architecture', link: '/curriculum/robot-fundamentals/robot-architecture' },
-            { text: 'Electrical Contract', link: '/curriculum/robot-fundamentals/electrical-contract' },
-            { text: 'Motor Control', link: '/curriculum/robot-fundamentals/motor-control' },
-            { text: 'PID Logic', link: '/curriculum/robot-fundamentals/pid-logic' },
-            { text: 'Command-Based Programming', link: '/curriculum/robot-fundamentals/command-based' },
-            { text: 'Operator Command Map', link: '/curriculum/robot-fundamentals/operator-command-map' },
           ],
         },
         {
@@ -76,9 +63,20 @@ export default defineConfig({
             { text: 'Making a Pull Request', link: '/curriculum/challenges/making-a-pull-request' },
             { text: 'Rotating to a Target Orientation', link: '/curriculum/challenges/rotating-to-a-target-orientation' },
             { text: 'Command Groups', link: '/curriculum/challenges/command-groups' },
+            { text: 'Providers & Factories', link: '/core-programming/patterns/providers-factories' },
+            { text: 'Dependency Injection', link: '/core-programming/patterns/dependency-injection' },
             { text: 'Upgrading Using the SeriouslyCommonLib', link: '/curriculum/challenges/upgrading-using-seriouslycommonlib' },
             { text: 'Running on a Real Robot', link: '/curriculum/challenges/running-on-a-real-robot' },
             { text: 'Auto-stopping Collector', link: '/curriculum/challenges/auto-stopping-collector' },
+          ],
+        },
+        {
+          text: 'Reference',
+          items: [
+            { text: 'Robot Architecture', link: '/curriculum/robot-fundamentals/robot-architecture' },
+            { text: 'Mapping Buttons to Commands', link: '/curriculum/robot-fundamentals/operator-command-map' },
+            { text: 'Git Introduction', link: '/curriculum/getting-started/git-introduction' },
+            { text: 'Clone with GitHub Desktop', link: '/curriculum/getting-started/clone-with-github-desktop' },
           ],
         },
         {

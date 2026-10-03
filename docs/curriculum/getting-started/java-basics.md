@@ -1,433 +1,236 @@
 # Java Basics
 
-Learn enough Java to write robot code. If you have never programmed before, start here.
+## Overview
 
-**New to programming?** You do not need any experience. This module starts from zero and teaches you exactly what you need for FRC.
+FIRST Robotics Competition (FRC) robot code is written using the Java programming language. Java is popularly used by large companies in industry like Google and Amazon, but it does not have the easiest learning curve. This lesson covers the minimum you need to know to get started with writing Java code.
 
-## What is Programming?
+## IntelliJ - Your IDE
 
-Programming is giving instructions to a computer. You write steps in a language the computer can understand (Java), and it follows those steps exactly.
+We use a program called IntelliJ to write our code. IntelliJ is an IDE, an "Integrated Development Environment." IDEs provide an integrated environment full of tools to help you to write, build, and test code. In the case of IntelliJ, it is optimized for writing Java code.
 
-**Analogy:** Think of programming like writing a recipe. You list ingredients (variables) and steps (methods). The computer is the chef that follows your recipe perfectly every time.
+Other examples of IDEs that you may have heard of include:
 
-## Learning Resources
+* Visual Studio
+* Eclipse
+* PyCharm
+* Android Studio
 
-Everyone learns differently. Use these alongside this tutorial:
+### Navigating IntelliJ
 
-| Resource | Style | Link |
-|----------|-------|------|
-| **Codecademy Learn Java** | Interactive -- type code in your browser | [codecademy.com/learn/learn-java](https://www.codecademy.com/learn/learn-java) |
-| **W3Schools Java** | Read and try examples | [w3schools.com/java](https://www.w3schools.com/java/) |
-| **freeCodeCamp Java Course** | 4-hour video walkthrough | [youtube.com/watch?v=A74TOX803D0](https://www.youtube.com/watch?v=A74TOX803D0) |
-| **Java for Complete Beginners** | Udemy free course | [udemy.com/course/java-tutorial](https://www.udemy.com/course/java-tutorial/) |
-| **Programiz Java** | Tutorials with visuals | [programiz.com/java-programming](https://www.programiz.com/java-programming) |
+There are a few key elements in the IntelliJ interface that you will need to familiarize yourself with:
 
-**Tip:** If you get stuck on a concept, look it up on W3Schools or watch the freeCodeCamp video. Seeing the same idea explained differently helps it click.
+#### Project and Branch selectors
 
-## Variables (Storing Information)
+The Project and Branch selectors tell you what version of the code you are working on. When working on the robot curriculum, you would usually expect the Project selector to say "XbotEdu".
 
-Variables store data so you can use it later. Every variable has a **type** (what kind of data) and a **name** (how you refer to it).
+The Branch selector may say "main", or it may show your own branch. A branch is a history of versions of your code, so you can track changes over time. Each saved version is called a "commit."
 
-```java
-// Type  name   =  value;
-int    score  =  42;         // Whole numbers (no decimals)
-double speed  =  0.75;       // Decimal numbers
-String name   = "XBot";      // Text (must be in quotes)
-boolean on    = true;        // True or false
-```
+![Project](https://github.com/user-attachments/assets/de2caa94-3138-486d-bf3c-1029765cfcfc)
+![Branch](https://github.com/user-attachments/assets/3d3525eb-683f-47f5-8213-6a5205d12c70)
 
-<details>
-<summary><strong>Why do I need to specify a type?</strong></summary>
+#### Project Browser
 
-Java is a **strongly typed** language. This means every variable must have a specific type, and you cannot put the wrong kind of data in it. This prevents bugs.
+The Project Browser is where you can navigate the various files that make up your project. There are two extremely important folders to know about: `src/main/java` and `src/test/java`.
 
-**Analogy:** Think of variable types like containers:
-- `int` = a box that only holds whole items (you cannot put half an apple in it)
-- `double` = a measuring cup (holds any amount: 1.5, 0.75, etc.)
-- `String` = a label maker (holds text only)
-- `boolean` = a light switch (only on or off)
+* `src/main/java` contains all the code that gets executed on your robot.
+* `src/test/java` contains all the code you use to verify the correctness of the code in `src/main/java` - we call these "test cases."
+
+The robot curriculum you are working through is primarily structured to have you implement robot code in `src/main/java` to make test cases run successfully.
+
+![Project Browser](https://github.com/user-attachments/assets/49f9bf3c-0576-46df-bd4e-26b1664ba9af)
+![Code Folders](https://github.com/user-attachments/assets/5a5fad70-9ac0-4c2d-b054-b0ead291344b)
+
+## Java
+
+Java is what the industry calls an "object-oriented programming language." You don't necessarily need to understand what that means, but it carries with it some consequences that mean even the simplest code file has some components you need to be aware of.
 
 ```java
-int x = 0.5;   // ERROR! Cannot put a decimal in an int
-double y = 5;  // OK! Java automatically converts 5 to 5.0
-```
+package competition;
 
-**In robot code:**
-- `int` for CAN IDs, port numbers, counting
-- `double` for motor speeds, PID values, distances
-- `String` for names, logging messages
-- `boolean` for "is the button pressed?", "is the motor running?"
-
-</details>
-
-### Naming Rules
-
-```java
-int motorSpeed;    // camelCase -- start lowercase, capitalize each new word
-int MotorSpeed;    // Wrong convention (classes use this style, not variables)
-int 2ndMotor;      // ERROR! Cannot start with a number
-int motor-speed;   // ERROR! No hyphens allowed
-int motor speed;   // ERROR! No spaces allowed
-```
-
-**Always use descriptive names.** `speed` is better than `s`. `frontLeftMotorPower` is better than `flmp`.
-
-## Methods (Actions)
-
-A **method** is a named block of code that does something. Think of it like a command you create: "when I say `stopMotor()`, set the motor power to 0."
-
-```java
-// Returns a value -- gives a result back
-public double add(double a, double b) {
-    return a + b;  // "return" sends the result back to the caller
-}
-
-// Returns nothing (void) -- just does the work
-public void stopMotor() {
-    motor.setPower(0);
+public class Main {
+  public static void main(String... args) {
+    System.out.println("Hello, World!");
+  }
 }
 ```
 
-<details>
-<summary><strong>Return vs Void -- what is the difference?</strong></summary>
+What does the above program do? It simply writes the text `Hello, World!` and then ends. But despite doing so little, there is a lot to know about this little block of code.
 
-When you ask someone a question, you expect an answer back. When you give someone an order, you just want them to do it.
+### Code Organization
 
-```java
-// "Return" = asking a question
-double result = add(2, 3);  // Returns 5.0, stored in "result"
+Java code is organized into "packages." All you really need to know here is that the package declared in a code file will generally match the folder structure that the file was placed in.
 
-// "Void" = giving an order
-stopMotor();  // Just does it, no result needed
-```
-
-**How to tell the difference:**
-- `public double add(...)` -- the word `double` before the name means "this method returns a double"
-- `public void stopMotor()` -- the word `void` means "this method returns nothing"
-
-Whenever you see `return`, the method is sending a value back. Whenever you see `void`, there is no return value.
-
-</details>
-
-### Parameters (Inputs to Methods)
-
-Methods can take **parameters** -- information they need to do their job.
+For a file with the following package declaration, it will be placed in either `src/main/java/competition` or `src/test/java/competition`.
 
 ```java
-public void setMotorSpeed(double speed) {
-    // "speed" is a parameter -- the caller decides what value to pass
-    System.out.println("Setting motor to " + speed);
-}
-
-// Calling the method:
-setMotorSpeed(0.5);   // Output: Setting motor to 0.5
-setMotorSpeed(-1.0);  // Output: Setting motor to -1.0
+package competition;
 ```
 
-The parameter `speed` gets a different value each time you call the method. This is how you make reusable code -- one method works for any value.
+IntelliJ automatically writes this line for you when you create a new file, so you usually don't need to worry about it.
 
-## Classes & Objects
+### Functions
 
-A **class** is a blueprint. An **object** is an actual thing built from that blueprint.
+All Java logic needs to live inside a function. Other code elements may live outside functions, like properties or constants, but logic always lives inside a function.
+
+In the example below, we have a class (described later) with a function named `execute`. For now, you can think of a class like a container for functions, properties, or constants that can be created or destroyed.
+
+> [!NOTE]
+> You'll hear people call these "methods" instead of "functions." In Java the two words mean the same thing in practice: a function that belongs to a class.
 
 ```java
-// Class = the blueprint
-public class Motor {
-    // Fields: data this class stores
-    private int port;        // "private" means only code in this class can access it
-    private double power;    // Current power level
-
-    // Constructor: runs when you create a new Motor (builds the object)
-    public Motor(int port) {
-        this.port = port;     // "this.port" = the field, "port" = the parameter
-        this.power = 0;       // Start stopped
-    }
-
-    // Method: something this Motor can do
-    public void setPower(double power) {
-        this.power = power;
-    }
-}
-
-// Objects = actual motors built from the blueprint
-Motor leftMotor = new Motor(1);   // Creates a Motor on port 1
-Motor rightMotor = new Motor(2);  // Creates a Motor on port 2
-
-leftMotor.setPower(0.5);   // Only left motor moves
-rightMotor.setPower(-0.5); // Only right motor moves (reverse)
-```
-
-<details>
-<summary><strong>The cookie cutter analogy for classes and objects</strong></summary>
-
-A **class** is like a cookie cutter. It defines the shape but is not a cookie itself.
-An **object** is an actual cookie made from that cutter.
-
-```
-Class:  Motor (blueprint) -- just a design
-Object: leftMotor (port 1) -- an actual motor you can control
-Object: rightMotor (port 2) -- another motor, independent
-```
-
-Each object is independent. Changing `leftMotor` does not affect `rightMotor`. This is important -- your robot might have 8 motors, each controlled by its own object, all created from the same class.
-
-**In robot code:** You will write one class (like `IntakeSubsystem`) and create one object from it. But the class is the design, the object is the actual thing running on the robot.
-
-</details>
-
-### The Constructor
-
-The **constructor** is a special method that runs when you create an object with `new`. It sets up the object's initial state.
-
-```java
-public class Motor {
-    private int port;
-
-    // Constructor: same name as the class, no return type
-    public Motor(int port) {
-        this.port = port;  // Save the port number
-    }
-}
-
-// When you call this:
-Motor m = new Motor(5);
-// Java does: 1. Creates a blank Motor object
-//            2. Calls the constructor with port=5
-//            3. Returns the finished object
-```
-
-If you do not write a constructor, Java provides an empty one. But you usually want one to set up your object properly.
-
-## Inheritance (Classes Can Extend Other Classes)
-
-**Inheritance** lets one class get all the features of another class, then add its own.
-
-```java
-// Parent class -- defines shared behavior
-public class BaseSubsystem {
-    public void periodic() {
-        // Called every robot loop (~20ms)
-        // Default: do nothing
-    }
-
-    public void log(String message) {
-        System.out.println(message);
-    }
-}
-
-// Child class -- gets everything from BaseSubsystem, adds its own
-// "extends" means DriveSubsystem IS A BaseSubsystem with extra features
-public class DriveSubsystem extends BaseSubsystem {
-    @Override  // Tells Java: "I am replacing the parent's periodic()"
-    public void periodic() {
-        // This runs instead of BaseSubsystem's periodic()
-        // Update motor speeds, read sensors, etc.
-    }
-
-    // New method only DriveSubsystem has
-    public void drive(double speed) {
-        // Drive logic here
-    }
-}
-```
-
-<details>
-<summary><strong>Why use inheritance instead of copying code?</strong></summary>
-
-Without inheritance, you would copy the same code into every class:
-
-```java
-// BAD: Copy-paste in every subsystem
-public class DriveSubsystem {
-    public void log(String msg) { System.out.println(msg); }
-}
-
-public class ShooterSubsystem {
-    public void log(String msg) { System.out.println(msg); }  // SAME CODE
-}
-
-// GOOD: Write once, inherit everywhere
-public class BaseSubsystem {
-    public void log(String msg) { System.out.println(msg); }
-}
-
-public class DriveSubsystem extends BaseSubsystem { }
-public class ShooterSubsystem extends BaseSubsystem { }
-// Both can call log() without writing it!
-```
-
-This is called **Don't Repeat Yourself (DRY)**. If you find yourself copying code, you should probably use inheritance or another pattern to share it.
-
-</details>
-
-## Interfaces (Contracts)
-
-An **interface** is a list of requirements. Any class that `implements` the interface must provide all the methods listed.
-
-```java
-// Interface: "Any electrical contract must have these methods"
-public interface ElectricalContract {
-    double getMotorSpeed();   // Must exist
-    int getMotorPort();       // Must exist
-    boolean isMotorReady();   // Must exist
-}
-
-// Class that promises to fulfill the contract
-public class CompetitionContract implements ElectricalContract {
+public class SwerveDriveWithJoysticksCommand extends BaseCommand {
+    // ... omitted code ...
     @Override
-    public double getMotorSpeed() {
-        return 0.5;  // Competition robot's motor speed
+    public void execute() {
+        swerveDrive.move(0, 0, 0);
+    }
+}
+```
+
+In a function declaration like this, `void` means that the function doesn't return anything. You could have other functions that return numbers like `double` or `int`, functions that return `String` (text), `boolean` (true/false), or "objects". The body of the function is contained within curly braces (`{}`).
+
+> [!TIP]
+> If you're coming from Python, in Java the indentation doesn't impact the code execution. As long as your code is within curly braces, it is treated like a block. We still indent our code for readability, even though the language does not require it.
+
+Sometimes functions have "annotations" - in this case `@Override`. These tell you something about the function or impact its behavior. In this case, `@Override` means that the class `BaseCommand` already has an `execute` function, and we are changing its behavior in `SwerveDriveWithJoysticksCommand`. Usually IntelliJ will manage this for you.
+
+You'll see other annotations like `@Singleton` or `@Inject` - these will be covered in more advanced lessons. Don't worry about them for now.
+
+Some functions are called "constructors." They set up the context or state for a class when it is created.
+
+```java
+public class SwerveDriveWithJoysticksCommand extends BaseCommand {
+
+    SwerveDriveSubsystem swerveDrive;
+    OperatorInterface oi;
+
+    @Inject
+    public SwerveDriveWithJoysticksCommand(SwerveDriveSubsystem driveSubsystem, OperatorInterface oi) {
+        this.swerveDrive = driveSubsystem;
+        this.oi = oi;
+
+        this.addRequirements(driveSubsystem);
+    }
+    // ... omitted code ...
+}
+```
+
+You'll notice the `SwerveDriveWithJoysticksCommand` constructor has the same name as the class, and it doesn't have a return type. This is a feature of all constructors. In our robot code, it is very common for a constructor to have the `@Inject` annotation.
+
+In this case, the constructor takes a couple of parameters. Each parameter is made up of a "type" followed by a "parameter name" - in `SwerveDriveSubsystem driveSubsystem`, the type is `SwerveDriveSubsystem` (the name of a class) and the parameter name is `driveSubsystem`.
+
+> [!TIP]
+> If you're coming from Python, you'll notice that Java requires you to specify types in many places, whereas Python does not require this. That is because Java is a "strongly typed" language. This makes it easier for your IDE to help you to auto-complete code, and for the process that builds your code, the "compiler" to check for errors before you ever run your code. This makes it harder to accidentally make silly mistakes like passing a number to a function where a true/false was expected.
+
+### Classes
+
+In object oriented programming languages, a "class" has a very specific meaning. In Java, every code file needs to contain a class, usually matching the file name. In the example below, you would expect the code to be in a file called `Main.java`.
+
+```java
+public class Main {
+  public static void main(String... args) {
+    System.out.println("Hello, World!");
+  }
+}
+```
+
+Notice how the body of the class is contained within curly braces (`{}`) just like a function. All blocks of code in Java use curly braces to mark the start and end of the block.
+
+In this case, since this is a complete Java program, it needs a `main` function, but for the code you'll be writing, the `main` function is already written so you don't need to understand the meaning of it, other than that this is where a Java program starts, and only one class can have a `main` function.
+
+Classes can also contain "state" - typically called properties. (This is different from the Property system that you will learn about later! The similarity in naming is inconvenient.)
+
+```java
+@Singleton
+public class CoralArmSubsystem extends BaseSetpointSubsystem<Angle> {
+
+    public final XCANMotorController armMotor;
+
+    double periodicTickCounter;
+    double rotationsAtZero = 0;
+    boolean isCalibrated = false;
+
+    // ... omitted code ...
+
+    @Inject
+    public CoralArmSubsystem(XCANMotorController.XCANMotorControllerFactory xcanMotorControllerFactory,
+                             ElectricalContract electricalContract, PropertyFactory propertyFactory,
+                             XDutyCycleEncoder.XDutyCycleEncoderFactory xDutyCycleEncoderFactory,
+                             XDigitalInput.XDigitalInputFactory xDigitalInputFactory) {
+        // ... omitted code ...
     }
 
     @Override
-    public int getMotorPort() {
-        return 1;  // Competition robot's wiring
+    public boolean isCalibrated() {
+        return isCalibrated;
     }
+
+    public void setCalibrated(boolean calibrated){
+        isCalibrated = calibrated;
+    }
+    // ... omitted code ...
+}
+```
+
+### Access Modifiers
+
+All of the prior examples included `public` scattered throughout. Other accessibility modifiers are `private`, `protected`, and no modifier (package protected).
+
+Accessibility modifiers determine how one class can interact with another class.
+
+* `public` functions, classes, or properties can be accessed by any other class.
+* `protected` functions or properties can be accessed by the current class or any subclasses.
+* `private` functions or properties can only be accessed by the current class.
+* package-private (no modifier) functions, classes, or properties are accessible to any code in the same package.
+
+It is a common mistake to forget a `public` modifier on a class or function, which might prevent you from accessing it from a unit test.
+
+Although it's not necessarily good practice, we tend to overuse `public` for most things in robot code, so that it is easily accessible to test cases. In industry, you would typically hide internal behavior of a class using `private` or `protected` to prevent a user of your class from using it in a way that would break its internal state.
+
+In the example below, we have a protected property with a `public` "getter" and "setter" function. Other classes can't touch `isCalibrated` directly, but they can read it and change it through those two functions.
+
+```java
+@Singleton
+public class CoralArmSubsystem extends BaseSetpointSubsystem<Angle> {
+    protected boolean isCalibrated = false;
+
+    // ... omitted code ...
 
     @Override
-    public boolean isMotorReady() {
-        return true;  // It is wired and ready
+    public boolean isCalibrated() {
+        return isCalibrated;
     }
+
+    public void setCalibrated(boolean calibrated){
+        isCalibrated = calibrated;
+    }
+    // ... omitted code ...
 }
 ```
 
-<details>
-<summary><strong>Interface vs Class -- what is the difference?</strong></summary>
+This example is simple, but you could imagine other scenarios where a "setter" changes more than one thing at the same time. If you exposed those properties as public, it is conceivable that some other class doesn't know that there is some complicated logic required to set the property correctly.
 
-An **interface** says WHAT must exist (the method names and types).
-A **class** says HOW it works (the actual code).
+### Basic Logic
 
-**Analogy:** An interface is like a restaurant menu (listing what dishes exist). A class is the kitchen (actually cooking the food).
+In Java, you can express logical operations with the following syntax:
 
-```
-Interface: "There will be a way to get the motor speed"
-Class: "Here is the code that gets the motor speed: return 0.5;"
-```
+| Operator | Description |
+| --- | --- |
+| `&&` | Logical AND |
+| `\|\|` | Logical OR |
+| `!` | Logical invert |
+| `==` | Equality |
+| `!=` | Inequality |
 
-**Why use interfaces:** You can swap implementations without changing the code that uses them.
-
-```java
-// Your subsystem uses the INTERFACE, not a specific class
-ElectricalContract contract;
-
-// It does not care WHICH contract it gets:
-contract = new CompetitionContract();  // Works on competition robot
-contract = new PracticeContract();     // Works on practice robot
-
-// Both work because both implement ElectricalContract
-double speed = contract.getMotorSpeed();
-```
-
-</details>
-
-## Putting It All Together
-
-Here is how these concepts work together in a real robot class:
+As an example, this would be a valid Java logical expression:
 
 ```java
-// A subsystem that controls the robot's intake mechanism
-public class IntakeSubsystem extends BaseSubsystem {
-
-    // Fields: data this subsystem keeps track of
-    private final ElectricalContract contract;
-    private boolean isRunning;
-
-    // Constructor: set up the subsystem
-    public IntakeSubsystem(ElectricalContract contract) {
-        this.contract = contract;
-        this.isRunning = false;
-    }
-
-    // Methods: what this subsystem can do
-    public void startIntake() {
-        if (contract.isIntakeReady()) {  // Check if hardware exists
-            isRunning = true;
-            System.out.println("Intake started");
-        }
-    }
-
-    public void stopIntake() {
-        isRunning = false;
-        System.out.println("Intake stopped");
-    }
-
-    // Returns a value (not void!)
-    public boolean isRunning() {
-        return isRunning;
-    }
-}
+boolean isFastFood = (isHamburger || isFrenchFries) && !isHealthy;
 ```
 
-## Key Terms Cheat Sheet
+> [!WARNING]
+> `==` compares two values, while a single `=` assigns a value. Writing `if (isCalibrated = true)` instead of `if (isCalibrated == true)` is a classic bug.
 
-| Term | Meaning | Example |
-|------|---------|---------|
-| **Variable** | Stores a value | `int x = 5;` |
-| **Method** | A named block of code | `public void run() { }` |
-| **Class** | A blueprint for objects | `public class Motor { }` |
-| **Object** | An instance of a class | `new Motor(1)` |
-| **Constructor** | Runs when creating an object | `public Motor(int port) { }` |
-| **Field** | A variable inside a class | `private int port;` |
-| **Parameter** | An input to a method | `setPower(double power)` |
-| **extends** | Inheritance | `class A extends B` |
-| **implements** | Interface fulfillment | `class A implements B` |
-| **@Override** | Replacing a parent method | `@Override public void run()` |
-| **return** | Send a value back | `return 42;` |
-| **void** | Returns nothing | `public void stop()` |
-| **private** | Only accessible in this class | `private int x;` |
-| **public** | Accessible everywhere | `public int x;` |
-| **final** | Cannot be changed | `final int MAX = 100;` |
-| **this** | Refers to this object | `this.port = port;` |
+## Next Steps
 
----
-
-## Quiz
-
-**Q1:** What does `extends` do in Java?
-
-- [ ] A) Makes the class run faster
-- [ ] B) Lets one class inherit from another
-- [ ] C) Deletes the parent class
-- [ ] D) Creates a new object
-
-<details>
-<summary>Answer</summary>
-
-**B) Lets one class inherit from another**
-
-`extends` creates a parent-child relationship where the child class gets all the methods and fields of the parent. This lets you reuse code instead of writing it over and over.
-
-</details>
-
-**Q2:** What is the difference between a class and an object?
-
-- [ ] A) A class is a blueprint, an object is an actual instance
-- [ ] B) They are the same thing
-- [ ] C) An object is a blueprint, a class is an instance
-- [ ] D) Classes cannot have methods
-
-<details>
-<summary>Answer</summary>
-
-**A) A class is a blueprint, an object is an actual instance**
-
-A class defines the structure (like a cookie cutter). An object is an actual thing created from that class (like a cookie). You can create many objects from one class.
-
-</details>
-
-**Q3:** What is the difference between an interface and a class?
-
-- [ ] A) Interfaces define WHAT methods must exist, classes define HOW they work
-- [ ] B) Classes are faster than interfaces
-- [ ] C) Interfaces contain working code
-- [ ] D) There is no difference
-
-<details>
-<summary>Answer</summary>
-
-**A) Interfaces define WHAT must exist, classes define HOW they work**
-
-An interface is a contract that lists required methods (no code). A class provides the actual implementation. You use `implements` to connect a class to an interface.
-
-</details>
-
+Continue with the next challenge: [Basic Robot Principles](/curriculum/challenges/basic-robot-principles)
