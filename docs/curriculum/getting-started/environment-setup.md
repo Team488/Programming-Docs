@@ -8,7 +8,7 @@ In this first challenge you'll get your own copy of the XbotEdu code, download i
 
 If you just want to do the curriculum, follow the instructions in [Edu Onboarding](/curriculum/getting-started/onboarding).
 
-Or if you need to set up for in-season robot programming, follow the instructions in [Full Programming Onboarding](https://github.com/Team488/XbotEdu/wiki/Programming-Onboarding) instead. It covers everything in Edu Onboarding plus a few extra tools.
+Or if you need to set up for in-season robot programming, follow the instructions in [Full Programming Onboarding](/curriculum/getting-started/in-season-onboarding) instead. It covers everything in Edu Onboarding plus a few extra tools.
 
 **Important:** Don't continue until onboarding is complete. Missing tools cause confusing errors in the steps below.
 

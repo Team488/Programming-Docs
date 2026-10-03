@@ -51,6 +51,7 @@ export default defineConfig({
             { text: 'Onboarding', link: '/curriculum/getting-started/onboarding' },
             { text: 'Environment Setup', link: '/curriculum/getting-started/environment-setup' },
             { text: 'Java Basics', link: '/curriculum/getting-started/java-basics' },
+            { text: 'In-Season Onboarding', link: '/curriculum/getting-started/in-season-onboarding' },
           ],
         },
         {
