@@ -156,23 +156,13 @@ The TankDriveWithJoysticksCommand needs to get values from the human and then te
 
 We have a robot simulator that lets us test out robot code without physically having a robot. This is very helpful because we often have to share access to the competition robot among many teams and people. The simulator lets anyone on the programming team try out their code and try and find problems with it there.
 
-These instructions assume you have access to a USB Gamepad. The team usually has extra of these so ask if you don't have one.
+This is the first time you'll use it, so follow [Running the Simulator](/curriculum/robot-fundamentals/simulator) from the top. You'll come back to that page in later challenges too.
 
-To try it out with your tank-drive code so far follow these steps:
-- In IntelliJ, in the top-right corner select the "Simulate Robot" launch configuration and then click the green play triangle beside it
-<img src="https://github.com/user-attachments/assets/cdeb67b8-27b7-4e70-886a-a6dda0f23fb8">
-  - This will open a new window called "Robot Simulation"
-  - On this new window, drag your gamepad from under "System Joysticks" on the left into the Joystick[0] slot (which is what operatorInterface.gamepad is looking for)
-  - Also in the top left under "Robot State" select "Teleoperated" to enable the robot. When you're done it should look like this:
-<img src="https://github.com/user-attachments/assets/66e2b6ea-1b31-4788-94d1-f7e10899975c">
+::: tip You'll need a gamepad
+Tank drive uses both sticks, and the keyboard fallback only has one, so ask for a gamepad if you don't have one.
+:::
 
-- Run the program "AdvantageScope (WPILib)", it might take a while to start and appear. The app name ends with the year of the WPILib version you installed, for example "AdvantageScope (WPILib) 2026".
-- In AdvantageScope, select File -> Connect to Simulator
-- Again in AdvantageScope, we'll now load the robot layout to show our tank on the screen. Open File -> Import Layout..., then select `AdvantageScope_layout.json` from the top of your XbotEdu repo.
-- Select either "2D top view" or "3D view" at the top of AdvantageScope
-- Use the joysticks to control the tank!
-
-Now you should be able to drive your robot around using your gamepad and the tank drive control scheme, try it out and navigate around the field to get a feel for it.
+Once the robot is on screen, drive it around the field using the tank drive control scheme to get a feel for it. Does pushing both sticks forward go straight? Does pushing them in opposite directions spin the robot in place?
 
 
 ## Saving your code

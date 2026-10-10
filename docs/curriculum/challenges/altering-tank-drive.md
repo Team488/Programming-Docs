@@ -59,7 +59,7 @@ operatorInterface.gamepad.getifAvailable(XboxButton.A).whileTrue(togglePrecision
 ```
 - IntelliJ will flag `TogglePrecisionDriveCommand` as unknown until it is imported. Press <kbd>Alt</kbd>+<kbd>Enter</kbd> on the red text and choose the import option. (`XboxButton` is already imported in this file.)
 
-Try it out in the simulator by driving around, pressing A and seeing if the drive is slowed as expected.
+Try it out in the [simulator](/curriculum/robot-fundamentals/simulator) by driving around, pressing A and seeing if the drive is slowed as expected.
 
 Once that works, see if you can map Arcade drive to a button and test that out too!
 

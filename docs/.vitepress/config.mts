@@ -82,6 +82,7 @@ export default defineConfig({
         {
           text: 'Reference',
           items: [
+            { text: 'Running the Simulator', link: '/curriculum/robot-fundamentals/simulator' },
             { text: 'Robot Architecture', link: '/curriculum/robot-fundamentals/robot-architecture' },
             { text: 'Robot Coordinate Conventions', link: '/curriculum/robot-fundamentals/coordinate-conventions' },
             { text: 'Mapping Buttons to Commands', link: '/curriculum/robot-fundamentals/operator-command-map' },

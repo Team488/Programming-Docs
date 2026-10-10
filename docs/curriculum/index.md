@@ -24,6 +24,7 @@ Background you will be pointed at from the challenges, and can come back to any 
 
 | Page | What It Covers |
 |------|----------------|
+| [Running the Simulator](robot-fundamentals/simulator) | Drive your code on a virtual field, and watch it in AdvantageScope |
 | [Robot Architecture](robot-fundamentals/robot-architecture) | Subsystems, Commands, the Scheduler, and how they fit together |
 | [Robot Coordinate Conventions](robot-fundamentals/coordinate-conventions) | Which way is positive, for both the robot and the field |
 | [Mapping Buttons to Commands](robot-fundamentals/operator-command-map) | Binding commands to gamepad buttons |
