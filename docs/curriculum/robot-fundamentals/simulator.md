@@ -45,17 +45,18 @@ When you're done it should look like this:
 3. Choose **File → Import Layout...** and select `AdvantageScope_layout.json` from the top folder of your XbotEdu repository. This sets up tabs for viewing the robot.
 4. Pick a tab at the top of the window.
 
-The tabs the layout gives you:
+The layout gives you two views of the robot on the 2026 field:
 
 | Tab | What it shows |
 |-----|---------------|
-| **2d top view** | The robot on the field from above. The easiest view for most challenges. |
-| **3d view** | The same thing in 3D. |
-| **Joysticks** | What the robot thinks your controller is doing. Handy when the robot doesn't respond. |
-| **Table** | Every value the robot code is logging. |
-| **Console** | Messages printed by the robot code. |
+| **2d top view** | The robot from above. The easiest view for most challenges. |
+| **3D Field** | The same thing in 3D. |
 
 Now drive! The robot on screen should move as you use the controller.
+
+::: tip Seeing the raw data
+The sidebar on the left lists every value the robot code is logging. Drag any of them into a tab, or onto a new tab from the **+** button, to look at it -- for example the drive motors under `AdvantageKit/DriveSubsystem`.
+:::
 
 ## Making changes
 
@@ -70,7 +71,7 @@ If AdvantageScope shows no data after a restart, choose **File → Connect to Si
 ## Troubleshooting
 
 **The robot doesn't move at all.**
-Check that **Teleoperated** is selected in the Robot Simulation window -- a disabled robot ignores every input. Then check that your controller is in the **Joystick[0]** slot, not one of the others. The **Joysticks** tab in AdvantageScope shows whether the robot is seeing your input.
+Check that **Teleoperated** is selected in the Robot Simulation window -- a disabled robot ignores every input. Then check that your controller is in the **Joystick[0]** slot, not one of the others. In the Robot Simulation window, the axis values under Joystick[0] should change as you move the sticks -- if they don't, the robot isn't getting your input.
 
 **My gamepad isn't listed under System Joysticks.**
 Make sure it's plugged in. If it still doesn't appear, stop and restart the simulator.
