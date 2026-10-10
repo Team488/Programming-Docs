@@ -33,4 +33,4 @@ The starter code reads the left stick and sends `0` as the right power. Read the
     }
 ```
 
-If your tests pass but the robot drives strangely in the simulator, check the signs: pushing a stick forward should move that side of the robot forward.
+If your tests pass but the robot drives strangely in the [simulator](/curriculum/robot-fundamentals/simulator), check the signs: pushing a stick forward should move that side of the robot forward.

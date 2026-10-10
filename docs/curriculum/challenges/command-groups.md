@@ -23,7 +23,7 @@ You might want to start by writing a new Command that can drive straight for a s
 
 Some practical notes:
 - Put your new classes alongside the others in `src/main/java/competition/subsystems/drive/commands/`.
-- To run your group in the simulator, register it the way `OperatorCommandMap` already registers `DriveToPosition` with `SmartDashboard.putData(...)`, or map it to a gamepad button like you did for precision drive. Then run the simulator the same way as in the [Tank Drive](/curriculum/challenges/tank-drive) challenge.
+- To run your group in the simulator, register it the way `OperatorCommandMap` already registers `DriveToPosition` with `SmartDashboard.putData(...)`, or map it to a gamepad button like you did for precision drive. Then [run the simulator](/curriculum/robot-fundamentals/simulator).
 - Heads up: a single Command instance can't be added to more than one CommandGroup, and can't be added to the same group twice. A square needs four turns, so you'll need four separate instances rather than reusing one.
 
 Test your program in the simulator (visualized in AdvantageScope)

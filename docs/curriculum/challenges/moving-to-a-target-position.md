@@ -59,7 +59,7 @@ pProperty = propertyFactory.createPersistentProperty("p", 1);
   - The second argument 1 in this case is the default value that the property should start with, make this whatever makes sense for your properties as you make them
 - Now when we want to read the value of this property in our code we can do that with `pProperty.get()`, if you don't have a good place to read this value already let's just print it out in the execute() so we can see it working `System.out.println(pProperty.get());`
 
-Now let's try this out by simulating your robot like before, but now we're also going to run another new program called **Elastic (WPILib)**. The app name ends with the year of the WPILib version you installed, for example "Elastic (WPILib) 2026".
+Now let's try this out by [running the simulator](/curriculum/robot-fundamentals/simulator) like before, but now we're also going to run another new program called **Elastic (WPILib)**. The app name ends with the year of the WPILib version you installed, for example "Elastic (WPILib) 2026".
 Elastic is a program for viewing and setting these Property values.
 - Inside Elastic you're going to click on "Add Widget" in the top bar.
 - Find your "p" value in the list under "Preferences -> DriveToPositionCommand -> p" and then drag the p value out onto the dashboard.
