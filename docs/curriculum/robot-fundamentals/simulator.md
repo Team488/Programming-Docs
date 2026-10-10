@@ -52,7 +52,6 @@ The tabs the layout gives you:
 | **2d top view** | The robot on the field from above. The easiest view for most challenges. |
 | **3d view** | The same thing in 3D. |
 | **Joysticks** | What the robot thinks your controller is doing. Handy when the robot doesn't respond. |
-| **Swerve** | Swerve module angles and speeds. Its data sources need setting up before it shows anything -- see the [Advanced Swerve Challenges](/curriculum/challenges/advanced-swerve-challenges). |
 | **Table** | Every value the robot code is logging. |
 | **Console** | Messages printed by the robot code. |
 
