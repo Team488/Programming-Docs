@@ -20,11 +20,19 @@ The simulator can use your keyboard as a joystick, but only for the **left stick
 
 ## 1. Start the simulator
 
-In the top-right corner of IntelliJ, select the **Simulate Robot** launch configuration, then click the green play triangle beside it.
-
+In the top-right corner of IntelliJ, select the **Simulate Robot** launch configuration, then click the green play triangle beside it. Click the down arrow if you don't see it.
 <img src="https://github.com/user-attachments/assets/cdeb67b8-27b7-4e70-886a-a6dda0f23fb8" alt="The Simulate Robot launch configuration in IntelliJ">
 
 Your code builds, and then a new window called **Robot Simulation** opens.
+
+### Another way to start the simulator
+
+There is a chance that the **Simulator Robot** doesn't work. If that happens follow these steps:
+
+1. Open the **Terminal** found at the bottom left 
+2. Type **./gradlew simulateJava**
+
+It can take sometime for it to run the first time.
 
 ## 2. Connect your controller and enable the robot
 
@@ -41,7 +49,7 @@ When you're done it should look like this:
 ## 3. Watch the robot in AdvantageScope
 
 1. Open **AdvantageScope (WPILib)**. It can take a while to start. The app name ends with the year of the WPILib version you installed, for example "AdvantageScope (WPILib) 2026".
-2. Choose **File → Connect to Simulator**.
+2. Choose **File → Connect to Simulator → Default**.
 3. Choose **File → Import Layout...** and select `AdvantageScope_layout.json` from the top folder of your XbotEdu repository. This sets up tabs for viewing the robot.
 4. Pick a tab at the top of the window.
 
