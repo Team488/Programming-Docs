@@ -27,7 +27,7 @@ Your code builds, and then a new window called **Robot Simulation** opens.
 
 ### Another way to start the simulator
 
-There is a chance that the **Simulator Robot** doesn't work. If that happens follow these steps:
+There is a chance that **Simulate Robot** doesn't work. If that happens follow these steps:
 
 1. Open the **Terminal** found at the bottom left 
 2. Type **./gradlew simulateJava**
