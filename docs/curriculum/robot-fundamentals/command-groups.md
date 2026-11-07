@@ -214,3 +214,87 @@ Step by step:
 - Once a command is part of a group, it belongs to that group. You can't add the same command
   instance to a second group, or to the same group twice, and you can't schedule it on its own
   anymore. If you need the same action more than once, create a separate instance each time.
+
+- Two commands in the same parallel group can't use (require) the same subsystem. For example,
+  you can't drive to a spot and run a different drive command at the same time, because both need
+  the drive subsystem. Commands in a sequential group can share subsystems, since only one runs at
+  a time.
+
+## A full autonomous routine
+
+Real autonomous routines get longer than the example above. Since every group is itself a
+`Command`, you can put groups inside other groups, as many levels deep as you need. Here's a
+routine that scores the game piece the robot starts with, then picks up and scores two more:
+
+```java
+public Command threePieceAuto() {
+    return new SequentialCommandGroup(
+        // Score the preloaded game piece, and lower the intake at the same time
+        new ParallelCommandGroup(
+            aimAndShoot(),
+            new DeployIntakeCommand()
+        ),
+
+        // Go get the first game piece and score it
+        driveAndCollect(firstGamePieceLocation),
+        driveBackAndShoot(),
+
+        // Go get the second game piece and score it
+        driveAndCollect(secondGamePieceLocation),
+        driveBackAndShoot()
+    );
+}
+
+// Spin up and aim at the same time, then feed the game piece into the shooter
+private Command aimAndShoot() {
+    return new SpinUpShooterCommand()
+        .alongWith(new AimHoodCommand(shotAngle))
+        .andThen(new FeedShooterCommand().withTimeout(1));
+}
+
+// Drive to a game piece with the rollers running. If the robot doesn't have
+// the game piece once it arrives, keep collecting for up to 1.5 more seconds.
+private Command driveAndCollect(Pose2d gamePieceLocation) {
+    return new DriveToPositionCommand(gamePieceLocation)
+        .deadlineFor(new RunCollectorCommand(), new RunHopperCommand())
+        .andThen(new CollectUntilGamePieceCommand().withTimeout(1.5));
+}
+
+// Drive back to the shooting spot while getting the shooter ready, then shoot
+private Command driveBackAndShoot() {
+    return new ParallelCommandGroup(
+            new DriveToPositionCommand(shootingSpot),
+            new SpinUpShooterCommand(),
+            new AimHoodCommand(shotAngle)
+        )
+        .andThen(new FeedShooterCommand().withTimeout(1));
+}
+```
+
+Here's what the robot does:
+
+1. **Preload.** The shooter spins up and the hood aims at the same time, then the game piece is
+   fed into the shooter. The intake lowers while all of that is happening, since it doesn't need
+   the shooter. The step ends once the shot is done *and* the intake is down.
+2. **First game piece.** The robot drives to it with the collector and hopper running. Arriving
+   at the spot ends that part (the drive is the deadline). If the robot still doesn't have the
+   game piece, it keeps collecting for up to 1.5 seconds, so a near miss doesn't throw off the
+   rest of the routine.
+3. **Score it.** On the way back, the robot spins up the shooter and aims the hood while it
+   drives, so it's ready to shoot the moment it arrives. It only shoots once all three are done.
+4. **Second game piece.** Same as steps 2 and 3, at a different location.
+
+A few things worth noticing:
+
+- **Helper methods keep it readable.** The top-level `threePieceAuto()` reads almost like the
+  list above. Each step's details live in their own method with a name that says what it does.
+- **Helper methods also create fresh commands.** `driveBackAndShoot()` is used twice. Because it
+  builds new commands with `new` every time it's called, each use gets its own instances. If you
+  created one `driveBackAndShoot` command and put it in the sequence twice, it would fail, because
+  a command can only be in one group.
+- **You can mix both styles.** The top level uses group classes, and the helpers use builder
+  methods. They make the same kinds of groups, so use whichever is easier to read for each part.
+- **Overlap saves time.** Most steps do something useful while waiting on something else:
+  aiming while driving, collecting while driving, lowering the intake while shooting. A
+  15-second autonomous goes by fast, so doing things in parallel is how a good routine fits in
+  more game pieces.
