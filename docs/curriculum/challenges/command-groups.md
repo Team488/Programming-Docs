@@ -7,7 +7,7 @@ This often comes up in the context of autonomous mode, where in the first 15s of
 
 ## Learning about CommandGroup classes
 
-Read the short article here: [Command Groups](https://github.com/Team488/SeriouslyCommonLib/wiki/Command-Groups)
+Read the short article here: [Command Groups](/curriculum/robot-fundamentals/command-groups)
 
 ## Test your knowledge
 
