@@ -86,6 +86,7 @@ export default defineConfig({
             { text: 'Robot Architecture', link: '/curriculum/robot-fundamentals/robot-architecture' },
             { text: 'Robot Coordinate Conventions', link: '/curriculum/robot-fundamentals/coordinate-conventions' },
             { text: 'Mapping Buttons to Commands', link: '/curriculum/robot-fundamentals/operator-command-map' },
+            { text: 'Command Groups', link: '/curriculum/robot-fundamentals/command-groups' },
             { text: 'Git Introduction', link: '/curriculum/getting-started/git-introduction' },
             { text: 'Clone with GitHub Desktop', link: '/curriculum/getting-started/clone-with-github-desktop' },
           ],
