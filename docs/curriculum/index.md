@@ -12,7 +12,10 @@ Get your accounts, tools, and a copy of the code before you write anything.
 |---|------|------------------|
 | 1 | [Onboarding](getting-started/onboarding) | Set up accounts and install the software you need |
 | 2 | [Environment Setup](getting-started/environment-setup) | Fork the practice project and open it in IntelliJ |
-| 3 | [Java Basics](getting-started/java-basics) | The minimum Java you need to get started |
+
+::: tip New to Java?
+If you don't already feel comfortable with Java, read [Java Basics](getting-started/java-basics) before the challenges. It covers the minimum you need to get started. If you already know Java, skip it.
+:::
 
 **Done with Setup?** Start the challenges below with [Basic Robot Principles](challenges/basic-robot-principles).
 
@@ -57,7 +60,7 @@ You don't need to read these up front. The challenges link to them when they're 
 
 ### Going deeper on Java
 
-[Java Basics](getting-started/java-basics) is deliberately short, just enough to start driving a robot. These pages go further. Work through them alongside the challenges rather than before them.
+[Java Basics](getting-started/java-basics) is deliberately short: just enough to start driving a robot. These pages go further. Work through them alongside the challenges rather than before them.
 
 | Page | What It Covers |
 |------|----------------|
