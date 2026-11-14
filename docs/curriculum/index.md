@@ -1,26 +1,70 @@
 # Curriculum Overview
 
-Welcome to the XBot programming curriculum. You will go from writing your first Java code to making a robot drive itself.
+Welcome to the XBot programming curriculum. You will go from writing your first Java code to making a robot drive itself. No programming experience is needed. The curriculum starts from zero and teaches you everything step by step.
 
-**No programming experience?** Start here. The curriculum assumes you know nothing about programming and teaches you everything step by step. [Java Basics](getting-started/java-basics) covers the minimum you need to begin, and the [Java track](#java-track) below goes deeper when you want it.
+**The path is two parts: Setup, then the Challenges, in order.** Each step builds on the one before it, so don't skip ahead.
 
-Work through the steps in order. Each challenge builds on the one before it.
+## Step 1: Setup
 
-## Setup
+Get your accounts, tools, and a copy of the code before you write anything.
 
-Get your accounts, tools, and a copy of the code before writing anything.
+| # | Step | What You Will Do |
+|---|------|------------------|
+| 1 | [Onboarding](getting-started/onboarding) | Set up accounts and install the software you need |
+| 2 | [Environment Setup](getting-started/environment-setup) | Fork the practice project and open it in IntelliJ |
+| 3 | [Java Basics](getting-started/java-basics) | The minimum Java you need to get started |
 
-| Step | What You Will Do |
-|------|------------------|
-| [Onboarding](getting-started/onboarding) | Set up accounts and install the software you need |
-| [Environment Setup](getting-started/environment-setup) | Fork the practice project and open it in IntelliJ |
-| [Java Basics](getting-started/java-basics) | The minimum Java you need to get started |
+**Done with Setup?** Start the challenges below with [Basic Robot Principles](challenges/basic-robot-principles).
 
-Programming on the competition robot during the season? [In-Season Onboarding](getting-started/in-season-onboarding) covers the extra hardware tools you will need.
+## Step 2: Challenges
+
+Hands-on exercises in the [XbotEdu](https://github.com/Team488/XbotEdu) practice project you set up in Step 1. Each one has unit tests, so you can check your own work without a physical robot.
+
+| # | Challenge | What You Will Build |
+|---|-----------|---------------------|
+| 1 | [Basic Robot Principles](challenges/basic-robot-principles) | Watch the command scheduler run, and see commands conflict |
+| 2 | [Tank Drive](challenges/tank-drive) | Drive a robot with two joysticks |
+| 3 | [Altering Tank Drive](challenges/altering-tank-drive) | Precision mode and arcade drive, mapped to buttons |
+| 4 | [Moving to a Target Position](challenges/moving-to-a-target-position) | Drive to an exact distance and stop there |
+| 5 | [Making a Pull Request](challenges/making-a-pull-request) | Submit your work for review |
+| 6 | [Rotating to a Target Orientation](challenges/rotating-to-a-target-orientation) | Turn to a heading, including the tricky angle math |
+| 7 | [Command Groups](challenges/command-groups) | Combine commands into an autonomous square |
+| 8 | [Providers & Factories](/core-programming/patterns/providers-factories) | *Reading:* how the team's code creates objects it cannot build directly |
+| 9 | [Dependency Injection](/core-programming/patterns/dependency-injection) | *Reading:* why your classes are handed what they need, and how |
+| 10 | [Upgrading Using the SeriouslyCommonLib](challenges/upgrading-using-seriouslycommonlib) | Replace your own control code with the team's library |
+| 11 | [Running on a Real Robot](challenges/running-on-a-real-robot) | Deploy your code to a RoboRIO |
+| 12 | [Auto-stopping Collector](challenges/auto-stopping-collector) | Build a subsystem and commands from scratch |
+
+::: tip Before the Auto-stopping Collector
+This is the first time you write a class from scratch rather than filling in a method. Get comfortable with **classes and objects** in [Object-Oriented Programming](getting-started/oop-concepts) first.
+:::
+
+Once those are done, there is one more, considerably harder:
+
+| Advanced | What You Will Build |
+|----------|---------------------|
+| [Advanced Swerve Challenges](challenges/advanced-swerve-challenges) | Drive a swerve chassis: steer and drive each module independently |
+
+## What's Next?
+
+After finishing the curriculum, move on to [Core Programming](/core-programming/) to learn the patterns the competition code is built on: maintainers, swerve drive, properties and tuning.
+
+---
 
 ## Reference
 
-Background you will be pointed at from the challenges, and can come back to any time.
+You don't need to read these up front. The challenges link to them when they're relevant, and you can come back to them any time.
+
+### Going deeper on Java
+
+[Java Basics](getting-started/java-basics) is deliberately short, just enough to start driving a robot. These pages go further. Work through them alongside the challenges rather than before them.
+
+| Page | What It Covers |
+|------|----------------|
+| [Object-Oriented Programming](getting-started/oop-concepts) | Encapsulation, inheritance, polymorphism, abstraction |
+| [Intermediate Java](getting-started/intermediate-java) | Generics, lambdas, Optional, collections, streams, enums |
+
+### Robot and tooling background
 
 | Page | What It Covers |
 |------|----------------|
@@ -28,64 +72,19 @@ Background you will be pointed at from the challenges, and can come back to any 
 | [Robot Architecture](robot-fundamentals/robot-architecture) | Subsystems, Commands, the Scheduler, and how they fit together |
 | [Robot Coordinate Conventions](robot-fundamentals/coordinate-conventions) | Which way is positive, for both the robot and the field |
 | [Mapping Buttons to Commands](robot-fundamentals/operator-command-map) | Binding commands to gamepad buttons |
+| [Command Groups](robot-fundamentals/command-groups) | Running commands in sequence and in parallel |
 | [Git Introduction](getting-started/git-introduction) | What source control is, and the terms you will see |
 | [Clone with GitHub Desktop](getting-started/clone-with-github-desktop) | Getting a copy of a repository onto your computer |
 
-## Java track
+### In-season
 
-[Java Basics](getting-started/java-basics) is deliberately short -- just enough to start driving a robot. These two pages go further, and you can work through them alongside the challenges rather than before them.
+Programming on the competition robot during the season? [In-Season Onboarding](getting-started/in-season-onboarding) covers the extra hardware tools you will need.
 
-| Page | What It Covers |
-|------|----------------|
-| [Object-Oriented Programming](getting-started/oop-concepts) | Encapsulation, inheritance, polymorphism, abstraction |
-| [Intermediate Java](getting-started/intermediate-java) | Generics, lambdas, Optional, collections, streams, enums |
+### AI tools
 
-Of the two, get comfortable with **classes and objects** before the [Auto-stopping Collector](challenges/auto-stopping-collector) challenge -- that is the first time you write a class from scratch rather than filling in a method.
-
-## Challenges
-
-Hands-on exercises in the [XbotEdu](https://github.com/Team488/XbotEdu) practice project. Each one has unit tests, so you can check your own work without a physical robot.
-
-| Step | What You Will Build |
+| Page | What You Will Learn |
 |------|---------------------|
-| [Basic Robot Principles](challenges/basic-robot-principles) | Watch the command scheduler run, and see commands conflict |
-| [Tank Drive](challenges/tank-drive) | Drive a robot with two joysticks |
-| [Altering Tank Drive](challenges/altering-tank-drive) | Precision mode and arcade drive, mapped to buttons |
-| [Moving to a Target Position](challenges/moving-to-a-target-position) | Drive to an exact distance and stop there |
-| [Making a Pull Request](challenges/making-a-pull-request) | Submit your work for review |
-| [Rotating to a Target Orientation](challenges/rotating-to-a-target-orientation) | Turn to a heading, including the tricky angle math |
-| [Command Groups](challenges/command-groups) | Combine commands into an autonomous square |
-| [Providers & Factories](/core-programming/patterns/providers-factories) | How the team's code creates objects it cannot build directly |
-| [Dependency Injection](/core-programming/patterns/dependency-injection) | Why your classes are handed what they need, and how |
-| [Upgrading Using the SeriouslyCommonLib](challenges/upgrading-using-seriouslycommonlib) | Replace your own control code with the team's library |
-| [Running on a Real Robot](challenges/running-on-a-real-robot) | Deploy your code to a RoboRIO |
-| [Auto-stopping Collector](challenges/auto-stopping-collector) | Build a subsystem and commands from scratch |
-
-Once those are done, there is one more, considerably harder:
-
-| Advanced | What You Will Build |
-|------|---------------------|
-| [Advanced Swerve Challenges](challenges/advanced-swerve-challenges) | Drive a swerve chassis: steer and drive each module independently |
-
-## AI Tools
-
-| Module | What You Will Learn |
-|--------|---------------------|
 | [AI Tools Setup](ai-tools/ai-tools-setup) | Configure and initialize OpenCode |
 | [Built-in Commands](ai-tools/ai-tools-commands) | Slash commands, undo, share, custom commands |
 | [Workflow Tips](ai-tools/ai-tools-workflow) | Writing prompts, Plan vs Build mode |
 | [Responsible AI Use](ai-tools/responsible-ai) | Ethics, code review, simulation, safety |
-
-## What's Next?
-
-After finishing the curriculum, move on to [Core Programming](/core-programming/) to learn the patterns the competition code is built on: maintainers, swerve drive, properties and tuning.
-
-## Practice Repo
-
-All exercises use [XbotEdu](https://github.com/Team488/XbotEdu) -- a practice robot project with unit tests so you can code without a physical robot.
-
-```bash
-git clone https://github.com/Team488/XbotEdu.git
-cd XbotEdu
-./gradlew test
-```
