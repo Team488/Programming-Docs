@@ -37,6 +37,7 @@ Hands-on exercises in the [XbotEdu](https://github.com/Team488/XbotEdu) practice
 | 10 | [Upgrading Using the SeriouslyCommonLib](challenges/upgrading-using-seriouslycommonlib) | Replace your own control code with the team's library |
 | 11 | [Running on a Real Robot](challenges/running-on-a-real-robot) | Deploy your code to a RoboRIO |
 | 12 | [Auto-stopping Collector](challenges/auto-stopping-collector) | Build a subsystem and commands from scratch |
+| 13 | [Reading Robot Logs](challenges/log-reading) | Use AdvantageScope to explore recorded robot behavior |
 
 ::: tip Before the Auto-stopping Collector
 This is the first time you write a class from scratch rather than filling in a method. Get comfortable with **classes and objects** in [Object-Oriented Programming](getting-started/oop-concepts) first.
